@@ -1,5 +1,6 @@
 package com.nasa.service.handler.impl;
 
+import com.nasa.bot.NasaBot;
 import com.nasa.service.MainManager;
 import com.nasa.service.handler.AbstractHandler;
 import lombok.AccessLevel;
@@ -28,8 +29,7 @@ public class CommandHandler extends AbstractHandler {
 
         switch (command) {
             case "start":
-                manager.sendTextMessage(chatId
-                        , "Привіт! Я NASA бот. Напиши /help для списку команд.");
+                manager.sendWelcomeMessage(chatId);
                 break;
             case "help":
                 manager.sendTextMessage(chatId
