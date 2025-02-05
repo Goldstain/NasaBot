@@ -1,34 +1,31 @@
-package com.nasa.service.handler.impl;
+package com.nasa.serviceBot.handler.impl;
 
-import com.nasa.bot.NasaBot;
-import com.nasa.service.MainManager;
-import com.nasa.service.handler.AbstractHandler;
+import com.nasa.serviceBot.MainManager;
+import com.nasa.serviceBot.handler.AbstractHandler;
+import com.nasa.serviceNasaAPI.impl.PictureOfTheDayServiceImpl;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CallbackHandler extends AbstractHandler {
+public class CallbackHandler implements AbstractHandler {
 
     MainManager manager;
+    PictureOfTheDayServiceImpl pictureOfTheDayService;
 
     @Autowired
-    public CallbackHandler(MainManager manager) {
+    public CallbackHandler(MainManager manager, PictureOfTheDayServiceImpl pictureOfTheDayService) {
         this.manager = manager;
+        this.pictureOfTheDayService = pictureOfTheDayService;
     }
 
     @Override
@@ -38,13 +35,23 @@ public class CallbackHandler extends AbstractHandler {
 
         if ("mainMenu".equals(callbackQuery)) {
             sendStartMenu(chatId);
+        } else if ("photo".equals(callbackQuery)) {
+            var media = pictureOfTheDayService.constructRequest();
+            System.out.println("$$$$ "+ media.isPresent()+ " $$$$ "+ media.get().getFirst()+" - "+media.get().getLast());
+
+            if (media.isPresent() && media.get().getFirst().equals("image")) {
+                manager.sendPhoto(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Picture of the Day");
+            } else if (media.isPresent() && media.get().getFirst().equals("video")) {
+                manager.sendVideo(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Video of the Day");
+            } else {
+                manager.sendTextMessage(chatId, "Не вдалося отримати фото дня, спробуйте іншим разом");
+            }
         } else {
             manager.sendTextMessage(chatId
                     , "Невідома кнопка");
         }
 
     }
-
 
 
     private void sendStartMenu(Long chatId) {

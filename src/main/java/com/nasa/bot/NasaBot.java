@@ -1,33 +1,26 @@
 package com.nasa.bot;
 
 import com.nasa.config.BotConfig;
-import com.nasa.service.UpdateDispatcher;
+import com.nasa.serviceBot.UpdateDispatcher;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class NasaBot extends TelegramLongPollingBot {
 
     BotConfig botConfig;
     UpdateDispatcher updateDispatcher;
 
-
     @Autowired
     public NasaBot(BotConfig botConfig, UpdateDispatcher updateDispatcher) {
+        super(botConfig.getToken());
         this.botConfig = botConfig;
         this.updateDispatcher = updateDispatcher;
     }
@@ -43,9 +36,5 @@ public class NasaBot extends TelegramLongPollingBot {
         return botConfig.getUsername();
     }
 
-    @Override
-    public String getBotToken() {
-        return botConfig.getToken();
-    }
 
 }

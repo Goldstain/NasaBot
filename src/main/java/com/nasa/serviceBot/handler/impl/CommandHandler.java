@@ -1,10 +1,8 @@
-package com.nasa.service.handler.impl;
+package com.nasa.serviceBot.handler.impl;
 
-import com.nasa.bot.NasaBot;
-import com.nasa.service.MainManager;
-import com.nasa.service.handler.AbstractHandler;
+import com.nasa.serviceBot.MainManager;
+import com.nasa.serviceBot.handler.AbstractHandler;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CommandHandler extends AbstractHandler {
+public class CommandHandler implements AbstractHandler {
 
     MainManager manager;
 
