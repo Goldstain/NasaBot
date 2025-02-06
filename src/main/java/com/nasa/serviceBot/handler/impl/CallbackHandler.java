@@ -31,20 +31,21 @@ public class CallbackHandler implements AbstractHandler {
 
     @Override
     public void useUpdate(Update update, NasaBot nasaBot) {
-        var callbackQuery = update.getCallbackQuery().getData();
-        var chatId = update.getCallbackQuery().getMessage().getChatId();
+        var callbackQuery = update.getCallbackQuery();
+        var button = callbackQuery.getData();
+        var chatId = callbackQuery.getMessage().getChatId();
 
-        if ("mainMenu".equals(callbackQuery)) {
+        if ("mainMenu".equals(button)) {
             sendStartMenu(chatId, nasaBot);
-        } else if ("photo".equals(callbackQuery)) {
+        } else if ("photo".equals(button)) {
             var media = pictureOfTheDayService.constructRequest();
 
             if (media.isPresent() && media.get().getFirst().equals("image")) {
-                manager.sendPhoto(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Picture of the Day",nasaBot);
+                manager.sendPhoto(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Picture of the Day", nasaBot);
             } else if (media.isPresent() && media.get().getFirst().equals("video")) {
-                manager.sendVideo(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Video of the Day",nasaBot);
+                manager.sendVideo(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Video of the Day", nasaBot);
             } else {
-                manager.sendTextMessage(chatId, "Не вдалося отримати фото дня, спробуйте іншим разом",nasaBot);
+                manager.sendTextMessage(chatId, "Не вдалося отримати фото дня, спробуйте іншим разом", nasaBot);
             }
         } else {
             manager.sendTextMessage(chatId
@@ -77,13 +78,19 @@ public class CallbackHandler implements AbstractHandler {
 
         List<InlineKeyboardButton> rows2 = List.of(calendarButton, helpButton);
 
+        InlineKeyboardButton mainMenuButton = new InlineKeyboardButton("\uD83D\uDEF0\uFE0F Головне меню");
+        mainMenuButton.setCallbackData("mainMenu");
+
+        List<InlineKeyboardButton> rows3 = List.of(mainMenuButton);
+
         keyboardRows.add(row1);
         keyboardRows.add(rows2);
+        keyboardRows.add(rows3);
         inlineKeyboardMarkup.setKeyboard(keyboardRows);
 
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(chatId)
-                .text("Вітаю! Я NASA Bot 🚀\nОберіть команду:")
+                .text("Я NASA Bot 🚀\nМаю для тебе цікаву інформацію\nОберіть команду:")
                 .replyMarkup(inlineKeyboardMarkup)
                 .build();
 

@@ -28,7 +28,8 @@ public class CommandHandler implements AbstractHandler {
 
         switch (command) {
             case "start":
-                manager.sendWelcomeMessage(chatId, nasaBot);
+                var firstName = message.getFrom().getFirstName();
+                manager.sendWelcomeMessage(chatId, firstName, nasaBot);
                 break;
             case "help":
                 manager.sendTextMessage(chatId

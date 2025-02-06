@@ -61,7 +61,10 @@ public class PictureOfTheDayServiceImpl implements NasaService {
         try {
             JsonNode jsonNode = objectMapper.readTree(json);
             media.add(jsonNode.get("media_type").asText());
+            media.add(jsonNode.get("title").asText());
+            media.add(jsonNode.get("explanation").asText());
             media.add(jsonNode.get("url").asText());
+
             return Optional.of(media);
         } catch (Exception e) {
             e.printStackTrace();

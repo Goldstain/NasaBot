@@ -41,7 +41,7 @@ public class MainManager {
     }
 
 
-    public void sendWelcomeMessage(Long chatId, NasaBot nasaBot) {
+    public void sendWelcomeMessage(Long chatId, String firstName, NasaBot nasaBot) {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
@@ -55,7 +55,7 @@ public class MainManager {
 
         var sendMessage = SendMessage.builder()
                 .chatId(chatId)
-                .text("\t Вітаю в NASA Bot! 🌌 \n Натисніть \"Головне меню\", щоб переглянути можливості.")
+                .text("\t Вітаю, " + firstName + ", в NASA Bot!  \uD83E\uDE90   \n Натисніть \"Головне меню\", щоб переглянути можливості.")
                 .replyMarkup(inlineKeyboardMarkup)
                 .build();
 
