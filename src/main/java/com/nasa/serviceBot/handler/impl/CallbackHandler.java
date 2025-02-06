@@ -37,7 +37,6 @@ public class CallbackHandler implements AbstractHandler {
             sendStartMenu(chatId);
         } else if ("photo".equals(callbackQuery)) {
             var media = pictureOfTheDayService.constructRequest();
-            System.out.println("$$$$ "+ media.isPresent()+ " $$$$ "+ media.get().getFirst()+" - "+media.get().getLast());
 
             if (media.isPresent() && media.get().getFirst().equals("image")) {
                 manager.sendPhoto(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Picture of the Day");

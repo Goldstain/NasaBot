@@ -1,10 +1,7 @@
 package com.nasa.serviceBot;
 
-import com.nasa.config.BotConfig;
-import com.nasa.config.NasaConfig;
 import com.nasa.serviceBot.handler.impl.CallbackHandler;
 import com.nasa.serviceBot.handler.impl.CommandHandler;
-import com.nasa.serviceNasaAPI.impl.PictureOfTheDayServiceImpl;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +29,8 @@ public class UpdateDispatcher {
             } else {
                 commandHandler.useUpdate(update);
             }
+        } else {
+            System.out.println("Отримано оновлення без повідомлення або callback-запиту.");
         }
     }
 

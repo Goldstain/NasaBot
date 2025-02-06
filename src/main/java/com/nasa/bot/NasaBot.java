@@ -4,10 +4,8 @@ import com.nasa.config.BotConfig;
 import com.nasa.serviceBot.UpdateDispatcher;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.apache.http.client.protocol.HttpClientContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -30,6 +28,7 @@ public class NasaBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         updateDispatcher.handleUpdate(update);
     }
+
 
     @Override
     public String getBotUsername() {
