@@ -1,5 +1,6 @@
 package com.nasa.serviceBot.handler.impl;
 
+import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
 import com.nasa.serviceBot.handler.AbstractHandler;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayServiceImpl;
@@ -29,31 +30,31 @@ public class CallbackHandler implements AbstractHandler {
     }
 
     @Override
-    public void useUpdate(Update update) {
+    public void useUpdate(Update update, NasaBot nasaBot) {
         var callbackQuery = update.getCallbackQuery().getData();
         var chatId = update.getCallbackQuery().getMessage().getChatId();
 
         if ("mainMenu".equals(callbackQuery)) {
-            sendStartMenu(chatId);
+            sendStartMenu(chatId, nasaBot);
         } else if ("photo".equals(callbackQuery)) {
             var media = pictureOfTheDayService.constructRequest();
 
             if (media.isPresent() && media.get().getFirst().equals("image")) {
-                manager.sendPhoto(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Picture of the Day");
+                manager.sendPhoto(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Picture of the Day",nasaBot);
             } else if (media.isPresent() && media.get().getFirst().equals("video")) {
-                manager.sendVideo(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Video of the Day");
+                manager.sendVideo(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Video of the Day",nasaBot);
             } else {
-                manager.sendTextMessage(chatId, "Не вдалося отримати фото дня, спробуйте іншим разом");
+                manager.sendTextMessage(chatId, "Не вдалося отримати фото дня, спробуйте іншим разом",nasaBot);
             }
         } else {
             manager.sendTextMessage(chatId
-                    , "Невідома кнопка");
+                    , "Невідома кнопка", nasaBot);
         }
 
     }
 
 
-    private void sendStartMenu(Long chatId) {
+    private void sendStartMenu(Long chatId, NasaBot nasaBot) {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
@@ -86,6 +87,6 @@ public class CallbackHandler implements AbstractHandler {
                 .replyMarkup(inlineKeyboardMarkup)
                 .build();
 
-        manager.sendCallbackQuery(sendMessage);
+        manager.sendCallbackQuery(sendMessage, nasaBot);
     }
 }

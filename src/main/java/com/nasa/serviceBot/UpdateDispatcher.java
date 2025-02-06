@@ -1,5 +1,6 @@
 package com.nasa.serviceBot;
 
+import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.handler.impl.CallbackHandler;
 import com.nasa.serviceBot.handler.impl.CommandHandler;
 import lombok.AccessLevel;
@@ -22,12 +23,12 @@ public class UpdateDispatcher {
         this.callbackHandler = callbackHandler;
     }
 
-    public void handleUpdate(Update update) {
+    public void handleUpdate(Update update, NasaBot nasaBot) {
         if (update.hasMessage() || update.hasCallbackQuery()) {
             if (update.hasCallbackQuery()) {
-                callbackHandler.useUpdate(update);
+                callbackHandler.useUpdate(update, nasaBot);
             } else {
-                commandHandler.useUpdate(update);
+                commandHandler.useUpdate(update, nasaBot);
             }
         } else {
             System.out.println("Отримано оновлення без повідомлення або callback-запиту.");

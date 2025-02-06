@@ -3,8 +3,6 @@ package com.nasa.serviceBot;
 import com.nasa.bot.NasaBot;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -21,14 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MainManager {
 
-    NasaBot nasaBot;
-
-    @Autowired
-    public MainManager(@Lazy NasaBot nasaBot) {
-        this.nasaBot = nasaBot;
-    }
-
-    public void sendTextMessage(Long chatId, String message) {
+    public void sendTextMessage(Long chatId, String message, NasaBot nasaBot) {
         var sendMessage = SendMessage.builder()
                 .chatId(chatId)
                 .text(message)
@@ -41,7 +32,7 @@ public class MainManager {
     }
 
 
-    public void sendCallbackQuery(SendMessage message) {
+    public void sendCallbackQuery(SendMessage message, NasaBot nasaBot) {
         try {
             nasaBot.execute(message);
         } catch (TelegramApiException e) {
@@ -50,7 +41,7 @@ public class MainManager {
     }
 
 
-    public void sendWelcomeMessage(Long chatId) {
+    public void sendWelcomeMessage(Long chatId, NasaBot nasaBot) {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
@@ -68,18 +59,16 @@ public class MainManager {
                 .replyMarkup(inlineKeyboardMarkup)
                 .build();
 
-        sendCallbackQuery(sendMessage);
+        sendCallbackQuery(sendMessage, nasaBot);
     }
 
-    public void sendPhoto(Long chatId, String imageUrl, String description) {
+    public void sendPhoto(Long chatId, String imageUrl, String description, NasaBot nasaBot) {
 
-        var sendPhoto = SendPhoto.builder()
+        SendPhoto sendPhoto = SendPhoto.builder()
                 .chatId(chatId)
                 .photo(new InputFile(imageUrl))
-//                .caption(description)
+                .caption(description)
                 .build();
-
-        System.out.println(" #### Photo " + description + " - " + chatId + " - " + imageUrl);
         try {
             nasaBot.execute(sendPhoto);
         } catch (TelegramApiException e) {
@@ -89,14 +78,12 @@ public class MainManager {
     }
 
 
-    public void sendVideo(Long chatId, String videoUrl, String description) {
+    public void sendVideo(Long chatId, String videoUrl, String description, NasaBot nasaBot) {
         var sendVideo = SendVideo.builder()
                 .chatId(chatId)
                 .video(new InputFile(videoUrl))
                 .caption(description)
                 .build();
-
-        System.out.println(" #### VIDEO " + description + " - " + chatId + " - " + videoUrl);
         try {
             nasaBot.execute(sendVideo);
         } catch (TelegramApiException e) {
