@@ -1,4 +1,4 @@
-package com.nasa.config;
+package com.nasa.initializer;
 
 import com.nasa.bot.NasaBot;
 import jakarta.annotation.PostConstruct;

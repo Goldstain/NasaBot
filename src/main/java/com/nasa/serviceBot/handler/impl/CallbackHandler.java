@@ -39,11 +39,15 @@ public class CallbackHandler implements AbstractHandler {
             sendStartMenu(chatId, nasaBot);
         } else if ("photo".equals(button)) {
             var media = pictureOfTheDayService.constructRequest();
+            var descriptions = media.get();
 
-            if (media.isPresent() && media.get().getFirst().equals("image")) {
-                manager.sendPhoto(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Picture of the Day", nasaBot);
-            } else if (media.isPresent() && media.get().getFirst().equals("video")) {
-                manager.sendVideo(chatId, media.get().getLast(), "\uD83D\uDCF8 Astronomy Video of the Day", nasaBot);
+            if (media.isPresent() && descriptions.getFirst().equals("image")) {
+                manager.sendPhoto(chatId, descriptions.getLast(), "\uD83D\uDCF8  " + descriptions.get(1), nasaBot);
+                manager.sendTextMessage(chatId, descriptions.get(2), nasaBot);
+            } else if (media.isPresent() && descriptions.getFirst().equals("video")) {
+                manager.sendVideo(chatId, descriptions.getLast(), "\uD83D\uDCF8  " + descriptions.get(1), nasaBot);
+                manager.sendTextMessage(chatId, descriptions.get(2), nasaBot);
+
             } else {
                 manager.sendTextMessage(chatId, "Не вдалося отримати фото дня, спробуйте іншим разом", nasaBot);
             }
