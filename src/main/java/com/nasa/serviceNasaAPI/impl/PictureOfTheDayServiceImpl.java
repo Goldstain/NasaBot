@@ -7,7 +7,9 @@ import com.nasa.serviceDeepL.DeepLService;
 import com.nasa.serviceNasaAPI.NasaService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -24,6 +26,8 @@ public class PictureOfTheDayServiceImpl implements NasaService {
     WebClient webClient;
     ObjectMapper objectMapper;
     DeepLService deepLservice;
+    @NonFinal
+    Optional<List<String>> lastMediaResponse;
 
     @Autowired
     public PictureOfTheDayServiceImpl(NasaConfig nasaConfig, WebClient webClient, ObjectMapper objectMapper, DeepLService deepLservice) {
@@ -31,13 +35,18 @@ public class PictureOfTheDayServiceImpl implements NasaService {
         this.webClient = webClient;
         this.objectMapper = objectMapper;
         this.deepLservice = deepLservice;
+        lastMediaResponse = Optional.empty();
     }
 
     @Override
     public Optional<List<String>> constructRequest() {
-        var imageUrl = extractMediaUrl(getJson());
-        if (imageUrl.isPresent()) {
-            return imageUrl;
+        if (lastMediaResponse.isPresent()) {
+            return lastMediaResponse;
+        }
+        var mediaResponse = extractMediaUrl(getJson());
+        lastMediaResponse = mediaResponse;
+        if (mediaResponse.isPresent()) {
+            return mediaResponse;
         }
         return Optional.empty();
     }
@@ -60,15 +69,16 @@ public class PictureOfTheDayServiceImpl implements NasaService {
         return webClientRequest;
     }
 
-    private Optional<List<String>> extractMediaUrl(String json) {
+    protected Optional<List<String>> extractMediaUrl(String json) {
         var media = new ArrayList<String>();
 
         try {
-            JsonNode jsonNode = objectMapper.readTree(json);
-            media.add(jsonNode.get("media_type").asText());
-            media.add(translator(jsonNode.get("title").asText()));
-            media.add(translator(jsonNode.get("explanation").asText()));
-            media.add(jsonNode.get("url").asText());
+            JsonNode jsonNode = ifArrayThenReturnJsonNode(objectMapper.readTree(json));
+
+            media.add(getJsonValue(jsonNode, "media_type"));
+            media.add(translator(getJsonValue(jsonNode, "title")));
+            media.add(translator(getJsonValue(jsonNode, "explanation")));
+            media.add(getJsonValue(jsonNode, "url"));
 
             return Optional.of(media);
         } catch (Exception e) {
@@ -77,8 +87,21 @@ public class PictureOfTheDayServiceImpl implements NasaService {
         }
     }
 
-    private String translator(String text) {
+    protected String getJsonValue(JsonNode jsonNode, String key) {
+        return jsonNode.has(key) && !jsonNode.get(key).isNull() ? jsonNode.get(key).asText() : "N/A";
+    }
+
+    protected String translator(String text) {
         return deepLservice.translate(text);
+    }
+
+    private JsonNode ifArrayThenReturnJsonNode(JsonNode jsonNode) {
+        return jsonNode.isArray() && !jsonNode.isNull() ? jsonNode.get(0) : jsonNode;
+    }
+
+    @Scheduled(cron = "0 30 8 * * *")
+    public void setLastMediaResponse() {
+        lastMediaResponse = Optional.empty();
     }
 
 

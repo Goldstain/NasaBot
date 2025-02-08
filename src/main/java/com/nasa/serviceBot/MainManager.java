@@ -1,7 +1,9 @@
 package com.nasa.serviceBot;
 
 import com.nasa.bot.NasaBot;
+import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -9,21 +11,28 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class MainManager {
 
-    public void sendTextMessage(Long chatId, String message, NasaBot nasaBot) {
-        var sendMessage = SendMessage.builder()
-                .chatId(chatId)
-                .text(message)
-                .build();
+    KeyboardFactory keyboardFactory = new KeyboardFactory();
+
+
+    public void sendTextMessage(Long chatId, String message, NasaBot nasaBot
+            , InlineKeyboardMarkup... inlineKeyboardMarkup) {
+        SendMessage sendMessage = new SendMessage();
+        if (inlineKeyboardMarkup.length == 0) {
+            sendMessage.setChatId(chatId);
+            sendMessage.setText(message);
+
+        } else {
+            sendMessage.setChatId(chatId);
+            sendMessage.setText(message);
+            sendMessage.setReplyMarkup(inlineKeyboardMarkup[0]);
+        }
         try {
             nasaBot.execute(sendMessage);
         } catch (TelegramApiException e) {
@@ -42,21 +51,11 @@ public class MainManager {
 
 
     public void sendWelcomeMessage(Long chatId, String firstName, NasaBot nasaBot) {
-        var inlineKeyboardMarkup = new InlineKeyboardMarkup();
-
-        List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
-
-        InlineKeyboardButton mainMenuButton = new InlineKeyboardButton("🚀 Головне меню");
-        mainMenuButton.setCallbackData("mainMenu");
-
-        keyboardRows.add(List.of(mainMenuButton));
-
-        inlineKeyboardMarkup.setKeyboard(keyboardRows);
 
         var sendMessage = SendMessage.builder()
                 .chatId(chatId)
                 .text("\t Вітаю, " + firstName + ", в NASA Bot!  \uD83E\uDE90   \n Натисніть \"Головне меню\", щоб переглянути можливості.")
-                .replyMarkup(inlineKeyboardMarkup)
+                .replyMarkup(keyboardFactory.mainMenuButton())
                 .build();
 
         sendCallbackQuery(sendMessage, nasaBot);
@@ -86,6 +85,19 @@ public class MainManager {
                 .build();
         try {
             nasaBot.execute(sendVideo);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMainMenuButton(Long chatId, InlineKeyboardMarkup keyboard, NasaBot nasaBot) {
+        var sendMessage = SendMessage.builder()
+                .chatId(chatId)
+                .replyMarkup(keyboard)
+                .text("\u200B")
+                .build();
+        try {
+            nasaBot.execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
