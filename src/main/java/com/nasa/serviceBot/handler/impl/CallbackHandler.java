@@ -57,7 +57,8 @@ public class CallbackHandler implements AbstractHandler {
             case "mainMenu":
                 sendStartMenu(chatId, nasaBot);
                 break;
-            case "":
+//            case "returnToRoversMenu":
+
             case "photo":
                 var media = pictureOfTheDayService.constructRequest();
                 sendPhotoOfTheDay(nasaBot, media, chatId);
@@ -128,7 +129,7 @@ public class CallbackHandler implements AbstractHandler {
         } else {
             roverInfo = "Не вдалося знайти інформацію по цьому марсоходу";
         }
-        manager.sendTextMessage(chatId, roverInfo, nasaBot, keyboardFactory.returnBackButton());
+        manager.sendTextMessage(chatId, roverInfo, nasaBot, keyboardFactory.returnToRoversMenu());
     }
 
 }

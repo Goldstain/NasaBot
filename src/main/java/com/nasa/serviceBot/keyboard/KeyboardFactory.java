@@ -25,17 +25,17 @@ public class KeyboardFactory {
         return inlineKeyboardMarkup;
     }
 
-    public InlineKeyboardMarkup returnBackButton() {
-        var inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
-
-        var inlineKeyboardButton = new InlineKeyboardButton("Назад");
-        inlineKeyboardButton.setCallbackData("returnBack");
-
-        keyboardRows.add(List.of(inlineKeyboardButton));
-        inlineKeyboardMarkup.setKeyboard(keyboardRows);
-        return inlineKeyboardMarkup;
-    }
+//    public InlineKeyboardMarkup returnBackButton() {
+//        var inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//        List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
+//
+//        var inlineKeyboardButton = new InlineKeyboardButton("Назад");
+//        inlineKeyboardButton.setCallbackData("returnBack");
+//
+//        keyboardRows.add(List.of(inlineKeyboardButton));
+//        inlineKeyboardMarkup.setKeyboard(keyboardRows);
+//        return inlineKeyboardMarkup;
+//    }
 
 
     public InlineKeyboardMarkup mainMenu() {
@@ -102,6 +102,18 @@ public class KeyboardFactory {
         keyboardRows.add(mainMenuButton().getKeyboard().getFirst());
         inlineKeyboardMarkup.setKeyboard(keyboardRows);
 
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup returnToRoversMenu() {
+        var inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
+
+        InlineKeyboardButton returnToRoversMenuButton = new InlineKeyboardButton("Назад");
+        returnToRoversMenuButton.setCallbackData("marsRoversPhotos");
+
+        keyboardRows.add(List.of(returnToRoversMenuButton));
+        inlineKeyboardMarkup.setKeyboard(keyboardRows);
         return inlineKeyboardMarkup;
     }
 }

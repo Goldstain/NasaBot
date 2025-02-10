@@ -27,9 +27,6 @@ public class MainManager {
             , InlineKeyboardMarkup... inlineKeyboardMarkup) {
         SendMessage sendMessage = new SendMessage();
 
-        System.out.println("KKKKKKKKKKKKKKKKKKKKKEEEYYYYBBbbbbbbbbbbb");
-        System.out.println(inlineKeyboardMarkup[0].getKeyboard().get(0).get(0).toString());
-
         if (inlineKeyboardMarkup.length == 0) {
             sendMessage.setChatId(chatId);
             sendMessage.setText(message);
