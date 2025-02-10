@@ -1,9 +1,11 @@
 package com.nasa.serviceBot.handler.impl;
 
 import com.nasa.bot.NasaBot;
+import com.nasa.config.NasaInfo;
 import com.nasa.serviceBot.MainManager;
 import com.nasa.serviceBot.handler.AbstractHandler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
+import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayRandomServiceImpl;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayServiceImpl;
 import lombok.AccessLevel;
@@ -18,25 +20,31 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 @Service
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CallbackHandler implements AbstractHandler {
 
     MainManager manager;
     PictureOfTheDayServiceImpl pictureOfTheDayService;
     PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService;
+    MarsRoverPhotos marsRoverPhotos;
     KeyboardFactory keyboardFactory;
+    NasaInfo nasaInfo;
+
 
     @Autowired
     public CallbackHandler(MainManager manager
             , @Qualifier("pictureOfTheDayServiceImpl") PictureOfTheDayServiceImpl pictureOfTheDayService
-            , PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService
-            , KeyboardFactory keyboardFactory) {
+            , PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService, MarsRoverPhotos marsRoverPhotos
+            , KeyboardFactory keyboardFactory, NasaInfo nasaInfo) {
         this.manager = manager;
         this.pictureOfTheDayService = pictureOfTheDayService;
         this.pictureOfTheDayRandomService = pictureOfTheDayRandomService;
+        this.marsRoverPhotos = marsRoverPhotos;
         this.keyboardFactory = keyboardFactory;
+        this.nasaInfo = nasaInfo;
     }
 
     @Override
@@ -49,13 +57,21 @@ public class CallbackHandler implements AbstractHandler {
             case "mainMenu":
                 sendStartMenu(chatId, nasaBot);
                 break;
+            case "":
             case "photo":
                 var media = pictureOfTheDayService.constructRequest();
-                sendMedia(nasaBot, media, chatId);
+                sendPhotoOfTheDay(nasaBot, media, chatId);
                 break;
             case "photoRandom":
                 var mediaRandom = pictureOfTheDayRandomService.constructRequest();
-                sendMedia(nasaBot, mediaRandom, chatId);
+                sendPhotoOfTheDay(nasaBot, mediaRandom, chatId);
+                break;
+            case "marsRoversPhotos":
+                manager.sendTextMessage(chatId, nasaInfo.getRoversInfo(), nasaBot, keyboardFactory.roversMenu());
+                break;
+            case "opportunity":
+                var roverInfo = marsRoverPhotos.constructRequest(button);
+                sendRoverInfo(nasaBot, roverInfo, chatId);
                 break;
             default:
                 manager.sendTextMessage(chatId
@@ -65,7 +81,7 @@ public class CallbackHandler implements AbstractHandler {
 
     }
 
-    private void sendMedia(NasaBot nasaBot, Optional<List<String>> media, Long chatId) {
+    private void sendPhotoOfTheDay(NasaBot nasaBot, Optional<List<String>> media, Long chatId) {
         var descriptions = media.get();
 
         if (media.isPresent() && descriptions.size() > 0) {
@@ -74,7 +90,7 @@ public class CallbackHandler implements AbstractHandler {
                         , "\uD83D\uDCF8  " + descriptions.get(1), nasaBot);
             } else if (descriptions.getFirst().equals("video")) {
                 manager.sendVideo(chatId, descriptions.getLast()
-                        , "\uD83D\uDCF8  " + descriptions.get(1), nasaBot );
+                        , "\uD83D\uDCF8  " + descriptions.get(1), nasaBot);
             }
             manager.sendTextMessage(chatId, descriptions.get(2), nasaBot
                     , keyboardFactory.mainMenuButton());
@@ -103,4 +119,16 @@ public class CallbackHandler implements AbstractHandler {
 
         manager.sendCallbackQuery(sendMessage, nasaBot);
     }
+
+    private void sendRoverInfo(NasaBot nasaBot, Optional<List<String>> media, Long chatId) {
+        String roverInfo;
+        if (media.isPresent()) {
+            var descriptions = media.get();
+            roverInfo = descriptions.stream().collect(Collectors.joining("\n"));
+        } else {
+            roverInfo = "Не вдалося знайти інформацію по цьому марсоходу";
+        }
+        manager.sendTextMessage(chatId, roverInfo, nasaBot, keyboardFactory.returnBackButton());
+    }
+
 }

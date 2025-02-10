@@ -29,7 +29,7 @@ public class PictureOfTheDayRandomServiceImpl implements NasaService {
     }
 
     @Override
-    public Optional<List<String>> constructRequest() {
+    public Optional<List<String>> constructRequest(String... options) {
         var mediaResponse = pictureOfTheDayService.extractMediaUrl(getJson());
         if (mediaResponse.isPresent()) {
             return mediaResponse;

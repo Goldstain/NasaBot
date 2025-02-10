@@ -13,6 +13,8 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.File;
+
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
@@ -24,6 +26,10 @@ public class MainManager {
     public void sendTextMessage(Long chatId, String message, NasaBot nasaBot
             , InlineKeyboardMarkup... inlineKeyboardMarkup) {
         SendMessage sendMessage = new SendMessage();
+
+        System.out.println("KKKKKKKKKKKKKKKKKKKKKEEEYYYYBBbbbbbbbbbbb");
+        System.out.println(inlineKeyboardMarkup[0].getKeyboard().get(0).get(0).toString());
+
         if (inlineKeyboardMarkup.length == 0) {
             sendMessage.setChatId(chatId);
             sendMessage.setText(message);
@@ -66,6 +72,22 @@ public class MainManager {
         SendPhoto sendPhoto = SendPhoto.builder()
                 .chatId(chatId)
                 .photo(new InputFile(imageUrl))
+                .caption(description)
+                .build();
+        try {
+            nasaBot.execute(sendPhoto);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void sendLocalPhoto(Long chatId, File file, String description, NasaBot nasaBot) {
+
+        SendPhoto sendPhoto = SendPhoto.builder()
+                .chatId(chatId)
+                .photo(new InputFile(file))
                 .caption(description)
                 .build();
         try {

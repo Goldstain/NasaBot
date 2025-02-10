@@ -5,6 +5,6 @@ import java.util.Optional;
 
 public interface NasaService {
 
-    Optional<?> constructRequest();
+    Optional<?> constructRequest(String... options);
 
 }

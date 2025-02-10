@@ -7,9 +7,6 @@ import com.nasa.serviceDeepL.DeepLService;
 import com.nasa.serviceNasaAPI.NasaService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.NonFinal;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -20,40 +17,33 @@ import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class PictureOfTheDayServiceImpl implements NasaService {
+public class MarsRoverPhotos implements NasaService {
 
     NasaConfig nasaConfig;
     WebClient webClient;
     ObjectMapper objectMapper;
-    DeepLService deepLservice;
-    @NonFinal
-    Optional<List<String>> lastMediaResponse;
+    DeepLService deepLService;
 
-    @Autowired
-    public PictureOfTheDayServiceImpl(NasaConfig nasaConfig, WebClient webClient, ObjectMapper objectMapper, DeepLService deepLservice) {
+    public MarsRoverPhotos(NasaConfig nasaConfig, WebClient webClient, ObjectMapper objectMapper, DeepLService deepLService) {
         this.nasaConfig = nasaConfig;
         this.webClient = webClient;
         this.objectMapper = objectMapper;
-        this.deepLservice = deepLservice;
-        lastMediaResponse = Optional.empty();
+        this.deepLService = deepLService;
     }
 
     @Override
-    public Optional<List<String>> constructRequest(String... options) {
-        if (lastMediaResponse.isPresent()) {
-            return lastMediaResponse;
-        }
-        var mediaResponse = extractMediaUrl(getJson());
-        lastMediaResponse = mediaResponse;
-        if (mediaResponse.isPresent()) {
-            return mediaResponse;
+    public Optional<List<String>> constructRequest(String... rover) {
+        Optional<List<String>> roverInfo = extractMediaUrl(getJson(rover[0]));
+
+        if (roverInfo.isPresent()) {
+            return roverInfo;
         }
         return Optional.empty();
     }
 
-
-    private String getJson() {
-        var url = nasaConfig.getPicture_of_the_day()
+    private String getJson(String rover) {
+        var url = nasaConfig.getMars_rovers_manifest()
+                .concat(rover)
                 .concat("?api_key=")
                 .concat(nasaConfig.getApi_key());
 
@@ -69,16 +59,22 @@ public class PictureOfTheDayServiceImpl implements NasaService {
         return webClientRequest;
     }
 
-    protected Optional<List<String>> extractMediaUrl(String json) {
+    private Optional<List<String>> extractMediaUrl(String json) {
         var media = new ArrayList<String>();
 
         try {
-            JsonNode jsonNode = ifArrayThenReturnJsonNode(objectMapper.readTree(json));
+            JsonNode jsonNode = ifArrayThenReturnJsonNode(objectMapper.readTree(json)).get("photo_manifest");
 
-            media.add(getJsonValue(jsonNode, "media_type"));
-            media.add(translator(getJsonValue(jsonNode, "title")));
-            media.add(translator(getJsonValue(jsonNode, "explanation")));
-            media.add(getJsonValue(jsonNode, "url"));
+            System.out.println("JJJJJSOOOOOOOOOOOOOOOOOOOOOOOOOO");
+            System.out.println(jsonNode.toString());
+
+            media.add("Назва: " + getJsonValue(jsonNode, "name"));
+            media.add("Стартував з Землі: " + getJsonValue(jsonNode, "launch_date"));
+            media.add("Прибув на Марс: " + getJsonValue(jsonNode, "landing_date"));
+            media.add("Статус місії: " + getJsonValue(jsonNode, "status"));
+            media.add("Працював марсіанських днів: " + getJsonValue(jsonNode, "max_sol"));
+            media.add("Остання дата отриманих знімків: " + getJsonValue(jsonNode, "max_date"));
+            media.add("Всього зроблено знімків: " + getJsonValue(jsonNode, "total_photos"));
 
             return Optional.of(media);
         } catch (Exception e) {
@@ -87,22 +83,11 @@ public class PictureOfTheDayServiceImpl implements NasaService {
         }
     }
 
-    protected String getJsonValue(JsonNode jsonNode, String key) {
+    private String getJsonValue(JsonNode jsonNode, String key) {
         return jsonNode.has(key) && !jsonNode.get(key).isNull() ? jsonNode.get(key).asText() : "N/A";
-    }
-
-    protected String translator(String text) {
-        return deepLservice.translate(text);
     }
 
     private JsonNode ifArrayThenReturnJsonNode(JsonNode jsonNode) {
         return jsonNode.isArray() && !jsonNode.isNull() ? jsonNode.get(0) : jsonNode;
     }
-
-    @Scheduled(cron = "0 30 8 * * *")
-    public void setLastMediaResponse() {
-        lastMediaResponse = Optional.empty();
-    }
-
-
 }
