@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.stream.Collectors;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -57,8 +56,6 @@ public class CallbackHandler implements AbstractHandler {
             case "mainMenu":
                 sendStartMenu(chatId, nasaBot);
                 break;
-//            case "returnToRoversMenu":
-
             case "photo":
                 var media = pictureOfTheDayService.constructRequest();
                 sendPhotoOfTheDay(nasaBot, media, chatId);
@@ -70,7 +67,9 @@ public class CallbackHandler implements AbstractHandler {
             case "marsRoversPhotos":
                 manager.sendTextMessage(chatId, nasaInfo.getRoversInfo(), nasaBot, keyboardFactory.roversMenu());
                 break;
+            case "spirit":
             case "opportunity":
+            case "curiosity":
                 var roverInfo = marsRoverPhotos.constructRequest(button);
                 sendRoverInfo(nasaBot, roverInfo, chatId);
                 break;
@@ -121,11 +120,10 @@ public class CallbackHandler implements AbstractHandler {
         manager.sendCallbackQuery(sendMessage, nasaBot);
     }
 
-    private void sendRoverInfo(NasaBot nasaBot, Optional<List<String>> media, Long chatId) {
+    private void sendRoverInfo(NasaBot nasaBot, Optional<String> roverInfoOpt, Long chatId) {
         String roverInfo;
-        if (media.isPresent()) {
-            var descriptions = media.get();
-            roverInfo = descriptions.stream().collect(Collectors.joining("\n"));
+        if (roverInfoOpt.isPresent()) {
+            roverInfo = roverInfoOpt.get();
         } else {
             roverInfo = "Не вдалося знайти інформацію по цьому марсоходу";
         }

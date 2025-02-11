@@ -109,7 +109,7 @@ public class KeyboardFactory {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
 
-        InlineKeyboardButton returnToRoversMenuButton = new InlineKeyboardButton("Назад");
+        InlineKeyboardButton returnToRoversMenuButton = new InlineKeyboardButton("◀\uFE0F  Назад");
         returnToRoversMenuButton.setCallbackData("marsRoversPhotos");
 
         keyboardRows.add(List.of(returnToRoversMenuButton));
