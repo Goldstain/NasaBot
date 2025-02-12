@@ -1,9 +1,11 @@
 package com.nasa.serviceNasaAPI.impl;
 
 import com.nasa.config.NasaConfig;
+import com.nasa.serviceBot.handler.impl.CommandHandler;
 import com.nasa.serviceNasaAPI.NasaService;
 import com.nasa.serviceNasaAPI.dto.ManifestResponse;
 import com.nasa.serviceNasaAPI.dto.ManifestResponseFull;
+import com.nasa.serviceNasaAPI.dto.Photos;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
@@ -59,6 +61,28 @@ public class MarsRoverPhotos implements NasaService {
     }
 
 
+    public Photos getPhotos(String camera) {
+        var url = nasaConfig.getMars_photos_curiosity()
+                .concat("earth_date=")
+                .concat(CommandHandler.currentDate)
+                .concat("&camera=")
+                .concat(camera)
+                .concat("&api_key=")
+                .concat(nasaConfig.getApi_key());
+
+        var Photos = webClient.get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(Photos.class)
+                .onErrorResume(e -> {
+                    e.printStackTrace();
+                    return Mono.just(new Photos());
+                })
+                .block();
+        return Photos;
+    }
+
+
     private ManifestResponse getManifestResponse(String rover) {
         var url = nasaConfig.getMars_rovers_manifest()
                 .concat(rover)
@@ -76,8 +100,6 @@ public class MarsRoverPhotos implements NasaService {
                 .block();
         return manifestResponse;
     }
-
-
 
 
 }

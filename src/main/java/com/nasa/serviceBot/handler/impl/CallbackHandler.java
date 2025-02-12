@@ -1,10 +1,13 @@
 package com.nasa.serviceBot.handler.impl;
 
 import com.nasa.bot.NasaBot;
+import com.nasa.config.NasaConfig;
 import com.nasa.config.NasaInfo;
 import com.nasa.serviceBot.MainManager;
 import com.nasa.serviceBot.handler.AbstractHandler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
+import com.nasa.serviceNasaAPI.dto.Photos;
+import com.nasa.serviceNasaAPI.dto.PhotosByDateCamera;
 import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayRandomServiceImpl;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayServiceImpl;
@@ -32,6 +35,7 @@ public class CallbackHandler implements AbstractHandler {
     MarsRoverPhotos marsRoverPhotos;
     KeyboardFactory keyboardFactory;
     NasaInfo nasaInfo;
+    NasaConfig nasaConfig;
     static String[] availableDataPhotos = new String[2];
 
 
@@ -39,13 +43,14 @@ public class CallbackHandler implements AbstractHandler {
     public CallbackHandler(MainManager manager
             , @Qualifier("pictureOfTheDayServiceImpl") PictureOfTheDayServiceImpl pictureOfTheDayService
             , PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService, MarsRoverPhotos marsRoverPhotos
-            , KeyboardFactory keyboardFactory, NasaInfo nasaInfo) {
+            , KeyboardFactory keyboardFactory, NasaInfo nasaInfo, NasaConfig nasaConfig) {
         this.manager = manager;
         this.pictureOfTheDayService = pictureOfTheDayService;
         this.pictureOfTheDayRandomService = pictureOfTheDayRandomService;
         this.marsRoverPhotos = marsRoverPhotos;
         this.keyboardFactory = keyboardFactory;
         this.nasaInfo = nasaInfo;
+        this.nasaConfig = nasaConfig;
     }
 
     @Override
@@ -53,6 +58,11 @@ public class CallbackHandler implements AbstractHandler {
         var callbackQuery = update.getCallbackQuery();
         var button = callbackQuery.getData();
         var chatId = callbackQuery.getMessage().getChatId();
+
+        if (button.endsWith(":roverCamera")) {
+            sendCameraPhotos(button, chatId, nasaBot);
+            return;
+        }
 
         switch (button) {
             case "mainMenu":
@@ -154,6 +164,21 @@ public class CallbackHandler implements AbstractHandler {
 
         availableDataPhotos[0] = roverInfo.substring(startDate, startDate + 10);
         availableDataPhotos[1] = roverInfo.substring(endDate, endDate + 10);
+    }
+
+
+    private void sendCameraPhotos(String button, Long chatId, NasaBot nasaBot) {
+        var camera = button.substring(0, button.lastIndexOf(":roverCamera"));
+        Photos photos = marsRoverPhotos.getPhotos(camera);
+        if (photos == null || photos.getPhotos().length == 0) return;
+
+        PhotosByDateCamera[] photosArray = photos.getPhotos();
+        for (PhotosByDateCamera photo : photosArray) {
+            manager.sendPhoto(chatId
+                    , photo.getImg_src()
+                    , "Фото ID: " + photo.getId()
+                    , nasaBot);
+        }
     }
 
 

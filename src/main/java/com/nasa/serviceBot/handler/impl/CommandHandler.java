@@ -21,6 +21,7 @@ public class CommandHandler implements AbstractHandler {
 
     MainManager manager;
     KeyboardFactory keyboardFactory;
+    public static String currentDate = "";
 
     @Autowired
     public CommandHandler(MainManager manager, KeyboardFactory keyboardFactory) {
@@ -49,6 +50,7 @@ public class CommandHandler implements AbstractHandler {
                     var description = keyboard.getKeyboard().size() == 1 ?
                             command.concat("  немає доступних камер") :
                             "Це список камер марсоходу доступних " + command + ", обери камеру";
+                    currentDate = command;
                     manager.sendTextMessage(chatId, description
                             , nasaBot, keyboard);
                 } else {

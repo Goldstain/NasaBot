@@ -15,6 +15,7 @@ public class NasaConfig {
     String picture_of_the_day;
     String picture_of_the_day_random;
     String mars_rovers_manifest;
+    String mars_photos_curiosity;
 
 
 
@@ -57,5 +58,13 @@ public class NasaConfig {
 
     public void setMars_rovers_manifest(String mars_rovers_manifest) {
         this.mars_rovers_manifest = mars_rovers_manifest;
+    }
+
+    public String getMars_photos_curiosity() {
+        return mars_photos_curiosity;
+    }
+
+    public void setMars_photos_curiosity(String mars_photos_curiosity) {
+        this.mars_photos_curiosity = mars_photos_curiosity;
     }
 }

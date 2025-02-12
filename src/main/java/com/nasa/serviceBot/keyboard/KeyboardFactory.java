@@ -137,7 +137,7 @@ public class KeyboardFactory {
         ManifestResponseRoverFullDate fullDate = Arrays.stream(photos)
                 .filter(obj -> obj.getEarth_date().equals(date))
                 .findFirst()
-                .orElseGet(() -> new ManifestResponseRoverFullDate());
+                .orElse(new ManifestResponseRoverFullDate());
         if (fullDate.getEarth_date() == null) return returnToRoversMenu();
 
 
@@ -148,13 +148,14 @@ public class KeyboardFactory {
         List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
         for (String camera : cameras) {
             var button = new InlineKeyboardButton(findCameraDescription(camera));
-            button.setCallbackData(camera);
+            button.setCallbackData(camera.concat(":roverCamera"));
             keyboardRows.add(List.of(button));
         }
         keyboardRows.add(returnToRoversMenu().getKeyboard().getFirst());
         inlineKeyboardMarkup.setKeyboard(keyboardRows);
         return inlineKeyboardMarkup;
     }
+
 
     private String findCameraDescription(String camera) {
         Camera cameraName = Arrays.stream(Camera.values())
