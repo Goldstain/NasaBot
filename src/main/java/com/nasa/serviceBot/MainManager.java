@@ -3,8 +3,8 @@ package com.nasa.serviceBot;
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -17,11 +17,14 @@ import java.io.File;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequiredArgsConstructor
 public class MainManager {
 
-    KeyboardFactory keyboardFactory = new KeyboardFactory();
+    KeyboardFactory keyboardFactory;
 
+    @Autowired
+    public MainManager(KeyboardFactory keyboardFactory) {
+        this.keyboardFactory = keyboardFactory;
+    }
 
     public void sendTextMessage(Long chatId, String message, NasaBot nasaBot
             , InlineKeyboardMarkup... inlineKeyboardMarkup) {

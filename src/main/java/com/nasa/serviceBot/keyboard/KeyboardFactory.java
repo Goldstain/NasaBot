@@ -1,15 +1,30 @@
 package com.nasa.serviceBot.keyboard;
 
+import com.nasa.serviceNasaAPI.dto.Camera;
+import com.nasa.serviceNasaAPI.dto.ManifestResponseFull;
+import com.nasa.serviceNasaAPI.dto.ManifestResponseRoverFullDate;
+import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class KeyboardFactory {
 
+    MarsRoverPhotos marsRoverPhotos;
+
+    @Autowired
+    public KeyboardFactory(MarsRoverPhotos marsRoverPhotos) {
+        this.marsRoverPhotos = marsRoverPhotos;
+    }
 
     public InlineKeyboardMarkup mainMenuButton() {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -24,18 +39,6 @@ public class KeyboardFactory {
         inlineKeyboardMarkup.setKeyboard(keyboardRows);
         return inlineKeyboardMarkup;
     }
-
-//    public InlineKeyboardMarkup returnBackButton() {
-//        var inlineKeyboardMarkup = new InlineKeyboardMarkup();
-//        List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
-//
-//        var inlineKeyboardButton = new InlineKeyboardButton("Назад");
-//        inlineKeyboardButton.setCallbackData("returnBack");
-//
-//        keyboardRows.add(List.of(inlineKeyboardButton));
-//        inlineKeyboardMarkup.setKeyboard(keyboardRows);
-//        return inlineKeyboardMarkup;
-//    }
 
 
     public InlineKeyboardMarkup mainMenu() {
@@ -84,7 +87,7 @@ public class KeyboardFactory {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
 
-        InlineKeyboardButton button1 = new InlineKeyboardButton("\uD83D\uDCFD\uFE0F Curiosity");
+        InlineKeyboardButton button1 = new InlineKeyboardButton("\uD83D\uDCFD\uFE0F Curiosity   \uD83C\uDF16");
         button1.setCallbackData("curiosity");
         List<InlineKeyboardButton> row1 = List.of(button1);
 
@@ -115,5 +118,55 @@ public class KeyboardFactory {
         keyboardRows.add(List.of(returnToRoversMenuButton));
         inlineKeyboardMarkup.setKeyboard(keyboardRows);
         return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup roverPhotoButton(InlineKeyboardMarkup keyboardMarkup) {
+
+        InlineKeyboardButton photoButton = new InlineKeyboardButton("\uD83D\uDCF8   Подивитись фото  \uD83D\uDC7D");
+        photoButton.setCallbackData("curiosityPhotos");
+
+        List<List<InlineKeyboardButton>> keyboard = keyboardMarkup.getKeyboard();
+        keyboard.addFirst(List.of(photoButton));
+        return keyboardMarkup;
+
+    }
+
+    public InlineKeyboardMarkup availableCamerasKeyboard(String date) {
+        ManifestResponseFull manifestResponseFull = marsRoverPhotos.getManifestResponseFull(date);
+        ManifestResponseRoverFullDate[] photos = manifestResponseFull.getPhoto_manifest().getPhotos();
+        ManifestResponseRoverFullDate fullDate = Arrays.stream(photos)
+                .filter(obj -> obj.getEarth_date().equals(date))
+                .findFirst()
+                .orElseGet(() -> new ManifestResponseRoverFullDate());
+        if (fullDate.getEarth_date() == null) return returnToRoversMenu();
+
+
+        String[] cameras = fullDate.getCameras();
+        if (cameras == null || cameras.length == 0) return returnToRoversMenu();
+
+        var inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
+        for (String camera : cameras) {
+            var button = new InlineKeyboardButton(findCameraDescription(camera));
+            button.setCallbackData(camera);
+            keyboardRows.add(List.of(button));
+        }
+        keyboardRows.add(returnToRoversMenu().getKeyboard().getFirst());
+        inlineKeyboardMarkup.setKeyboard(keyboardRows);
+        return inlineKeyboardMarkup;
+    }
+
+    private String findCameraDescription(String camera) {
+        Camera cameraName = Arrays.stream(Camera.values())
+                .filter(cam -> cam.toString().equals(camera))
+                .findFirst()
+                .orElse(Camera.DEFAULT);
+        var alias = cameraName.getAlias();
+        if (alias.isEmpty() || alias.isBlank()) {
+            return camera;
+        } else {
+            return camera.concat("  - ").concat(alias);
+        }
+
     }
 }

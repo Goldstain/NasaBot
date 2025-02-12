@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ManifestRoverInfo {
+public class ManifestResponseRoverFull {
 
     String name;
     String landing_date;
@@ -13,6 +13,7 @@ public class ManifestRoverInfo {
     int max_sol;
     String max_date;
     int total_photos;
+    ManifestResponseRoverFullDate[] photos;
 
 
     public String getName() {
@@ -71,15 +72,11 @@ public class ManifestRoverInfo {
         this.total_photos = total_photos;
     }
 
-    @Override
-    public String toString() {
-        return "Назва: " + name +
-                "\nСтартував з Землі: " + launch_date +
-                "\nПрибув на Марс: " + landing_date +
-                "\nСтатус місії: " + status +
-                "\nПрацював марсіанських днів: " + max_sol +
-                "\nОстання дата отриманих знімків: " + max_date +
-                "\nВсього зроблено знімків: " + total_photos;
+    public ManifestResponseRoverFullDate[] getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(ManifestResponseRoverFullDate[] photos) {
+        this.photos = photos;
     }
 }
-

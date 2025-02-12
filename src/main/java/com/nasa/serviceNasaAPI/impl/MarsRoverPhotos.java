@@ -1,10 +1,9 @@
 package com.nasa.serviceNasaAPI.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nasa.config.NasaConfig;
-import com.nasa.serviceDeepL.DeepLService;
 import com.nasa.serviceNasaAPI.NasaService;
 import com.nasa.serviceNasaAPI.dto.ManifestResponse;
+import com.nasa.serviceNasaAPI.dto.ManifestResponseFull;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
@@ -19,25 +18,46 @@ public class MarsRoverPhotos implements NasaService {
 
     NasaConfig nasaConfig;
     WebClient webClient;
-    ObjectMapper objectMapper;
-    DeepLService deepLService;
 
-    public MarsRoverPhotos(NasaConfig nasaConfig, WebClient webClient, ObjectMapper objectMapper, DeepLService deepLService) {
+    public MarsRoverPhotos(NasaConfig nasaConfig, WebClient webClient) {
         this.nasaConfig = nasaConfig;
         this.webClient = webClient;
-        this.objectMapper = objectMapper;
-        this.deepLService = deepLService;
     }
 
     @Override
-    public Optional<String> constructRequest(String... rover) {
-        var roverInfo = getManifestResponse(rover[0]).toString();
+    public Optional<String> constructRequest(String... rovers) {
+        String roverInfo;
+        if (rovers != null && rovers.length > 0) {
+            roverInfo = getManifestResponse(rovers[0]).toString();
+        } else {
+            return Optional.empty();
+        }
 
-        if (!roverInfo.isBlank() && !roverInfo.isBlank()) {
+        if (!roverInfo.isEmpty() && !roverInfo.isBlank()) {
             return Optional.of(roverInfo);
         }
         return Optional.empty();
     }
+
+
+    public ManifestResponseFull getManifestResponseFull(String date) {
+        var url = nasaConfig.getMars_rovers_manifest()
+                .concat("curiosity")
+                .concat("?api_key=")
+                .concat(nasaConfig.getApi_key());
+
+        var manifestResponseFull = webClient.get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(ManifestResponseFull.class)
+                .onErrorResume(e -> {
+                    e.printStackTrace();
+                    return Mono.just(new ManifestResponseFull());
+                })
+                .block();
+        return manifestResponseFull;
+    }
+
 
     private ManifestResponse getManifestResponse(String rover) {
         var url = nasaConfig.getMars_rovers_manifest()
@@ -58,35 +78,6 @@ public class MarsRoverPhotos implements NasaService {
     }
 
 
-//    private Optional<List<String>> extractMediaUrl(String json) {
-//        var media = new ArrayList<String>();
-//
-//        try {
-//            JsonNode jsonNode = ifArrayThenReturnJsonNode(objectMapper.readTree(json)).get("photo_manifest");
-//
-//            System.out.println("JJJJJSOOOOOOOOOOOOOOOOOOOOOOOOOO");
-//            System.out.println(jsonNode.toString());
-//
-//            media.add("Назва: " + getJsonValue(jsonNode, "name"));
-//            media.add("Стартував з Землі: " + getJsonValue(jsonNode, "launch_date"));
-//            media.add("Прибув на Марс: " + getJsonValue(jsonNode, "landing_date"));
-//            media.add("Статус місії: " + getJsonValue(jsonNode, "status"));
-//            media.add("Працював марсіанських днів: " + getJsonValue(jsonNode, "max_sol"));
-//            media.add("Остання дата отриманих знімків: " + getJsonValue(jsonNode, "max_date"));
-//            media.add("Всього зроблено знімків: " + getJsonValue(jsonNode, "total_photos"));
-//
-//            return Optional.of(media);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return Optional.empty();
-//        }
-//    }
 
-//    private String getJsonValue(JsonNode jsonNode, String key) {
-//        return jsonNode.has(key) && !jsonNode.get(key).isNull() ? jsonNode.get(key).asText() : "N/A";
-//    }
-//
-//    private JsonNode ifArrayThenReturnJsonNode(JsonNode jsonNode) {
-//        return jsonNode.isArray() && !jsonNode.isNull() ? jsonNode.get(0) : jsonNode;
-//    }
+
 }
