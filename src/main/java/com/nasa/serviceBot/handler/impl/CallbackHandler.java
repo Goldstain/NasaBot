@@ -173,11 +173,14 @@ public class CallbackHandler implements AbstractHandler {
         if (photos == null || photos.getPhotos().length == 0) return;
 
         PhotosByDateCamera[] photosArray = photos.getPhotos();
+        int count = 10;
         for (PhotosByDateCamera photo : photosArray) {
             manager.sendPhoto(chatId
                     , photo.getImg_src()
-                    , "Фото ID: " + photo.getId()
+                    , "Фото ID: " + photo.getId() + "\t\t\t" + photo.getEarth_date()
                     , nasaBot);
+            count--;
+            if (count == 0) break;
         }
     }
 

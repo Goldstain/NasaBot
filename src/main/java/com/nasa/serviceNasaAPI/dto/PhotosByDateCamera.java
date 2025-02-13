@@ -8,6 +8,7 @@ public class PhotosByDateCamera {
 
     int id;
     String img_src;
+    String earth_date;
 
 
     public String getImg_src() {
@@ -24,5 +25,13 @@ public class PhotosByDateCamera {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getEarth_date() {
+        return earth_date;
+    }
+
+    public void setEarth_date(String earth_date) {
+        this.earth_date = earth_date;
     }
 }
