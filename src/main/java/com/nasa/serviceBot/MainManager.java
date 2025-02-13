@@ -11,9 +11,11 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
+import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -100,16 +102,39 @@ public class MainManager {
 
 
     public void sendVideo(Long chatId, String videoUrl, String description, NasaBot nasaBot) {
-        var sendVideo = SendVideo.builder()
-                .chatId(chatId)
-                .video(new InputFile(videoUrl))
-                .caption(description)
-                .build();
-        try {
-            nasaBot.execute(sendVideo);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
+
+        if (videoUrl.contains("youtube.com")) {
+            var index = videoUrl.lastIndexOf("/embed/") + "/embed/".length();
+            var previewUrl = "https://img.youtube.com/vi/" + videoUrl.substring(index) + "/hqdefault.jpg";
+            SendPhoto sendPreviewPhoto = SendPhoto.builder()
+                    .chatId(chatId)
+                    .photo(new InputFile(previewUrl))
+                    .caption(description)
+                    .replyMarkup(InlineKeyboardMarkup.builder()
+                            .keyboardRow(List.of(InlineKeyboardButton.builder()
+                                    .text("Переглянути відео")
+                                    .url(videoUrl)
+                                    .build()))
+                            .build())
+                    .build();
+            try {
+                nasaBot.execute(sendPreviewPhoto);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        } else {
+            SendVideo sendVideo = SendVideo.builder()
+                    .chatId(chatId)
+                    .video(new InputFile(videoUrl))
+                    .caption(description)
+                    .build();
+            try {
+                nasaBot.execute(sendVideo);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void sendMainMenuButton(Long chatId, InlineKeyboardMarkup keyboard, NasaBot nasaBot) {
