@@ -173,6 +173,7 @@ public class CallbackHandler implements AbstractHandler {
         if (photos == null || photos.getPhotos().length == 0) return;
 
         PhotosByDateCamera[] photosArray = photos.getPhotos();
+        String earthDate = photosArray[0].getEarth_date();
         int count = 10;
         for (PhotosByDateCamera photo : photosArray) {
             manager.sendPhoto(chatId
@@ -182,6 +183,8 @@ public class CallbackHandler implements AbstractHandler {
             count--;
             if (count == 0) break;
         }
+        manager.sendTextMessage(
+                chatId, "\uD83D\uDCF9   Вибрати іншу камеру     \uD83D\uDD3D", nasaBot, keyboardFactory.availableCamerasKeyboard(earthDate));
     }
 
 

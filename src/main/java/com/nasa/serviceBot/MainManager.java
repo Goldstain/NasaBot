@@ -137,18 +137,18 @@ public class MainManager {
 
     }
 
-    public void sendMainMenuButton(Long chatId, InlineKeyboardMarkup keyboard, NasaBot nasaBot) {
-        var sendMessage = SendMessage.builder()
-                .chatId(chatId)
-                .replyMarkup(keyboard)
-                .text("\u200B")
-                .build();
-        try {
-            nasaBot.execute(sendMessage);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void sendMainMenuButton(Long chatId, InlineKeyboardMarkup keyboard, NasaBot nasaBot) {
+//        var sendMessage = SendMessage.builder()
+//                .chatId(chatId)
+//                .replyMarkup(keyboard)
+//                .text("\u200B")
+//                .build();
+//        try {
+//            nasaBot.execute(sendMessage);
+//        } catch (TelegramApiException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 }
