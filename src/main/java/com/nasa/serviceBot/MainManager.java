@@ -105,18 +105,21 @@ public class MainManager {
 
         if (videoUrl.contains("youtube.com")) {
             var index = videoUrl.lastIndexOf("/embed/") + "/embed/".length();
-            var previewUrl = "https://img.youtube.com/vi/" + videoUrl.substring(index) + "/hqdefault.jpg";
+            var previewUrl = "https://img.youtube.com/vi/"
+                    + videoUrl.substring(index, videoUrl.indexOf('?'))
+                    + "/hqdefault.jpg";
             SendPhoto sendPreviewPhoto = SendPhoto.builder()
                     .chatId(chatId)
                     .photo(new InputFile(previewUrl))
                     .caption(description)
                     .replyMarkup(InlineKeyboardMarkup.builder()
                             .keyboardRow(List.of(InlineKeyboardButton.builder()
-                                    .text("Переглянути відео")
+                                    .text("Переглянути на YouTube")
                                     .url(videoUrl)
                                     .build()))
                             .build())
                     .build();
+            System.out.println("+====== " + previewUrl);
             try {
                 nasaBot.execute(sendPreviewPhoto);
             } catch (TelegramApiException e) {

@@ -65,6 +65,9 @@ public class CallbackHandler implements AbstractHandler {
         }
 
         switch (button) {
+            case "help":
+
+                break;
             case "mainMenu":
                 sendStartMenu(chatId, nasaBot);
                 break;
