@@ -119,7 +119,6 @@ public class MainManager {
                                     .build()))
                             .build())
                     .build();
-            System.out.println("+====== " + previewUrl);
             try {
                 nasaBot.execute(sendPreviewPhoto);
             } catch (TelegramApiException e) {

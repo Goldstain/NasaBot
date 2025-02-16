@@ -46,39 +46,51 @@ public class KeyboardFactory {
 
         List<List<InlineKeyboardButton>> keyboardRows = new ArrayList<>();
 
-        InlineKeyboardButton newButton = new InlineKeyboardButton("\uD83D\uDEF0\uFE0F Останні новини NASA");
-        newButton.setCallbackData("news");
+        InlineKeyboardButton newsButton = new InlineKeyboardButton("\uD83D\uDEF0\uFE0F Останні новини NASA");
+        newsButton.setCallbackData("news");
+
+        List<InlineKeyboardButton> row1 = List.of(newsButton);
+
 
         InlineKeyboardButton photoButton = new InlineKeyboardButton("\uD83C\uDF0C Фото дня");
         photoButton.setCallbackData("photo");
 
-        List<InlineKeyboardButton> row1 = List.of(newButton, photoButton);
+        InlineKeyboardButton apodButton = new InlineKeyboardButton("\uD83C\uDF9E\uFE0F   AstroVideo  🔴");
+        apodButton.setCallbackData("apodYoutube");
+        apodButton.setUrl("https://www.youtube.com/@APODVideos/videos");
+
+        List<InlineKeyboardButton> row2 = List.of(photoButton, apodButton);
 
 
-        InlineKeyboardButton photoRandomButton = new InlineKeyboardButton("\uD83C\uDF0C Випадкове фото дня");
+        InlineKeyboardButton photoRandomButton = new InlineKeyboardButton("\uD83C\uDF0C  Випадкове фото дня");
         photoRandomButton.setCallbackData("photoRandom");
 
-        List<InlineKeyboardButton> row2 = List.of(photoRandomButton);
+        List<InlineKeyboardButton> row3 = List.of(photoRandomButton);
 
 
         InlineKeyboardButton marsRoversPhotosButton = new InlineKeyboardButton("\uD83D\uDCF8 \uD83D\uDFE0  Фото з марсоходів");
         marsRoversPhotosButton.setCallbackData("marsRoversPhotos");
 
-        List<InlineKeyboardButton> rows3 = List.of(marsRoversPhotosButton);
+        List<InlineKeyboardButton> row4 = List.of(marsRoversPhotosButton);
 
 
         InlineKeyboardButton calendarButton = new InlineKeyboardButton("📅 Космічний календар");
         calendarButton.setCallbackData("calendar");
 
+        List<InlineKeyboardButton> row5 = List.of(calendarButton);
+
+
         InlineKeyboardButton helpButton = new InlineKeyboardButton("ℹ️ Допомога");
         helpButton.setCallbackData("help");
 
-        List<InlineKeyboardButton> rows4 = List.of(calendarButton, helpButton);
+        List<InlineKeyboardButton> row6 = List.of(helpButton);
 
         keyboardRows.add(row1);
         keyboardRows.add(row2);
-        keyboardRows.add(rows3);
-        keyboardRows.add(rows4);
+        keyboardRows.add(row3);
+        keyboardRows.add(row4);
+        keyboardRows.add(row5);
+        keyboardRows.add(row6);
         inlineKeyboardMarkup.setKeyboard(keyboardRows);
         return inlineKeyboardMarkup;
     }
