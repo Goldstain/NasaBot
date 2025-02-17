@@ -9,6 +9,7 @@ import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.dto.Photos;
 import com.nasa.serviceNasaAPI.dto.PhotosByDateCamera;
 import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
+import com.nasa.serviceNasaAPI.impl.NewsRSS;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayRandomServiceImpl;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayServiceImpl;
 import lombok.AccessLevel;
@@ -36,6 +37,7 @@ public class CallbackHandler implements AbstractHandler {
     KeyboardFactory keyboardFactory;
     NasaInfo nasaInfo;
     NasaConfig nasaConfig;
+    NewsRSS newsRSS;
     static String[] availableDataPhotos = new String[2];
 
 
@@ -43,7 +45,7 @@ public class CallbackHandler implements AbstractHandler {
     public CallbackHandler(MainManager manager
             , @Qualifier("pictureOfTheDayServiceImpl") PictureOfTheDayServiceImpl pictureOfTheDayService
             , PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService, MarsRoverPhotos marsRoverPhotos
-            , KeyboardFactory keyboardFactory, NasaInfo nasaInfo, NasaConfig nasaConfig) {
+            , KeyboardFactory keyboardFactory, NasaInfo nasaInfo, NasaConfig nasaConfig, NewsRSS newsRSS) {
         this.manager = manager;
         this.pictureOfTheDayService = pictureOfTheDayService;
         this.pictureOfTheDayRandomService = pictureOfTheDayRandomService;
@@ -51,6 +53,7 @@ public class CallbackHandler implements AbstractHandler {
         this.keyboardFactory = keyboardFactory;
         this.nasaInfo = nasaInfo;
         this.nasaConfig = nasaConfig;
+        this.newsRSS = newsRSS;
     }
 
     @Override
@@ -70,6 +73,9 @@ public class CallbackHandler implements AbstractHandler {
                 break;
             case "mainMenu":
                 sendStartMenu(chatId, nasaBot);
+                break;
+            case "news":
+                sendLatestNews(chatId, nasaBot);
                 break;
             case "photo":
                 var media = pictureOfTheDayService.constructRequest();
@@ -100,6 +106,7 @@ public class CallbackHandler implements AbstractHandler {
         }
 
     }
+
 
     private void sendPhotoOfTheDay(NasaBot nasaBot, Optional<List<String>> media, Long chatId) {
         var descriptions = media.get();
@@ -188,6 +195,17 @@ public class CallbackHandler implements AbstractHandler {
         }
         manager.sendTextMessage(
                 chatId, "\uD83D\uDCF9   Вибрати іншу камеру     \uD83D\uDD3D", nasaBot, keyboardFactory.availableCamerasKeyboard(earthDate));
+    }
+
+    private void sendLatestNews(Long chatId, NasaBot nasaBot) {
+        List<String> news = newsRSS.constructRequest().orElseGet(() -> List.of("Новин немає"));
+
+        StringBuilder newsMessage = new StringBuilder("Останні новини NASA:\n\n");
+        for (String item : news) {
+            newsMessage.append(item).append("\n\n");
+        }
+
+        manager.sendTextMessage(chatId, newsMessage.toString(), nasaBot, keyboardFactory.mainMenuButton());
     }
 
 
