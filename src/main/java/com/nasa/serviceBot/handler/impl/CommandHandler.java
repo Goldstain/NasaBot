@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Location;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.time.LocalDate;
@@ -40,16 +41,10 @@ public class CommandHandler implements AbstractHandler {
         var chatId = message.getChatId();
 
         if (message.hasLocation()) {
-            Location location = message.getLocation();
-            Optional<String> astroInfoResult
-                    = astroInfo.constructResponse(location.getLatitude().toString()
-                    , location.getLongitude().toString());
-
-            var result = astroInfoResult.isPresent()
-                    ? astroInfoResult.get()
-                    : "Невдалося отримати інформацію, спробуйте пізніше";
-
-            manager.sendTextMessage(chatId, astroInfoResult.get(), nasaBot, keyboardFactory.mainMenuButton());
+            sendAstroInfoByIP(nasaBot, message, chatId);
+            return;
+        } else if (isCorrectCoordinates(command)) {
+            sendAstroInfoByCoordinates(chatId, command, nasaBot);
             return;
         }
 
@@ -62,6 +57,10 @@ public class CommandHandler implements AbstractHandler {
             case "/help":
                 manager.sendTextMessage(chatId
                         , "Ось список доступних команд:\n/start - Почати\n/help - Допомога", nasaBot);
+                break;
+            case "Отримати по координатам":
+                manager.sendTextMessage(chatId, "Введіть широту і довготу за зразком:\n" +
+                        "50 31 або -50.004505 -36.233709", nasaBot, keyboardFactory.mainMenuButton());
                 break;
             default:
                 if (isCorrectDate(command).isPresent()) {
@@ -78,6 +77,34 @@ public class CommandHandler implements AbstractHandler {
                 }
         }
     }
+
+    private void sendAstroInfoByIP(NasaBot nasaBot, Message message, Long chatId) {
+        Location location = message.getLocation();
+        Optional<String> astroInfoResult
+                = astroInfo.constructResponse(location.getLatitude().toString()
+                , location.getLongitude().toString());
+
+        var result = astroInfoResult.isPresent()
+                ? astroInfoResult.get()
+                : "Невдалося отримати інформацію, спробуйте пізніше";
+
+        manager.sendTextMessage(chatId, astroInfoResult.get(), nasaBot, keyboardFactory.mainMenuButton());
+    }
+
+
+    private boolean isCorrectCoordinates(String coordinates) {
+        String regex = "^-?(90|[0-8]?[0-9])(?:[.,][0-9]+)?\\s+-?-?(180|1[0-7][0-9]|[0-9]?[0-9])(?:[.,][0-9]+)?$";
+        return Pattern.matches(regex, coordinates);
+    }
+
+    private void sendAstroInfoByCoordinates(Long chatId, String coordinates, NasaBot nasaBot) {
+        String latitude = coordinates.substring(0, coordinates.indexOf(" "));
+        String longitude = coordinates.substring(coordinates.lastIndexOf(" ")).trim();
+
+        Optional<String> astroInfoResult = astroInfo.constructResponse(latitude, longitude);
+        manager.sendTextMessage(chatId, astroInfoResult.get(), nasaBot, keyboardFactory.mainMenuButton());
+    }
+
 
     private Optional<String> isCorrectDate(String command) {
         String regex = "20[0-3][0-9]-(0[0-9]|1[0-2])-([0-2][0-9]|3[0-1])";
