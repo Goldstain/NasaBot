@@ -17,6 +17,8 @@ public class NasaConfig {
     String mars_rovers_manifest;
     String mars_photos_curiosity;
     String rss_feed;
+    String astro_info_api_key;
+    String astro_info;
 
 
 
@@ -75,5 +77,21 @@ public class NasaConfig {
 
     public void setRss_feed(String rss_feed) {
         this.rss_feed = rss_feed;
+    }
+
+    public String getAstro_info_api_key() {
+        return astro_info_api_key;
+    }
+
+    public void setAstro_info_api_key(String astro_info_api_key) {
+        this.astro_info_api_key = astro_info_api_key;
+    }
+
+    public String getAstro_info() {
+        return astro_info;
+    }
+
+    public void setAstro_info(String astro_info) {
+        this.astro_info = astro_info;
     }
 }

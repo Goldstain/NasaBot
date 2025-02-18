@@ -9,7 +9,10 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,10 +77,10 @@ public class KeyboardFactory {
         List<InlineKeyboardButton> row4 = List.of(marsRoversPhotosButton);
 
 
-        InlineKeyboardButton calendarButton = new InlineKeyboardButton("📅 Космічний календар");
-        calendarButton.setCallbackData("calendar");
+        InlineKeyboardButton astroInfoButton = new InlineKeyboardButton("\uD83C\uDF04 Астрономічні дані");
+        astroInfoButton.setCallbackData("astroInfo");
 
-        List<InlineKeyboardButton> row5 = List.of(calendarButton);
+        List<InlineKeyboardButton> row5 = List.of(astroInfoButton);
 
 
         InlineKeyboardButton helpButton = new InlineKeyboardButton("ℹ️ Допомога");
@@ -94,6 +97,32 @@ public class KeyboardFactory {
         inlineKeyboardMarkup.setKeyboard(keyboardRows);
         return inlineKeyboardMarkup;
     }
+
+
+    public ReplyKeyboardMarkup astroInfoMenu() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        keyboardMarkup.setResizeKeyboard(true);
+        keyboardMarkup.setOneTimeKeyboard(true);
+
+        KeyboardButton getAstroInfoByIP = new KeyboardButton("Отримати по Вашому IP");
+        getAstroInfoByIP.setRequestLocation(true);
+
+        KeyboardRow row1 = new KeyboardRow();
+        row1.add(getAstroInfoByIP);
+
+
+        KeyboardButton getAstroInfoByLocation = new KeyboardButton("Отримати по координатам");
+
+        KeyboardRow row2 = new KeyboardRow();
+        row2.add(getAstroInfoByLocation);
+
+        List<KeyboardRow> keyboardRows = new ArrayList<>();
+        keyboardRows.add(row1);
+        keyboardRows.add(row2);
+        keyboardMarkup.setKeyboard(keyboardRows);
+        return keyboardMarkup;
+    }
+
 
     public InlineKeyboardMarkup roversMenu() {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();

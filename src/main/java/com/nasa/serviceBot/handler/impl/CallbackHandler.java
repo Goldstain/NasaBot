@@ -78,11 +78,11 @@ public class CallbackHandler implements AbstractHandler {
                 sendLatestNews(chatId, nasaBot);
                 break;
             case "photo":
-                var media = pictureOfTheDayService.constructRequest();
+                var media = pictureOfTheDayService.constructResponse();
                 sendPhotoOfTheDay(nasaBot, media, chatId);
                 break;
             case "photoRandom":
-                var mediaRandom = pictureOfTheDayRandomService.constructRequest();
+                var mediaRandom = pictureOfTheDayRandomService.constructResponse();
                 sendPhotoOfTheDay(nasaBot, mediaRandom, chatId);
                 break;
             case "marsRoversPhotos":
@@ -91,13 +91,17 @@ public class CallbackHandler implements AbstractHandler {
             case "spirit":
             case "opportunity":
             case "curiosity":
-                var roverInfo = marsRoverPhotos.constructRequest(button);
+                var roverInfo = marsRoverPhotos.constructResponse(button);
                 sendRoverInfo(nasaBot, roverInfo, chatId);
                 break;
             case "curiosityPhotos":
                 var description = "Введіть доступну дату в діапазоні від \n" + availableDataPhotos[0] + " до "
                         + availableDataPhotos[1] + "\nВ форматі РРРР-ММ-ДД\nНаприклад: 2022-08-24";
                 manager.sendTextMessage(chatId, description, nasaBot, keyboardFactory.returnToRoversMenu());
+                break;
+            case "astroInfo":
+                manager.sendTextMessage(chatId, "\uD83C\uDF13   Це інформація про денний цикл Сонця і Місяця в залежності від " +
+                        "Вашого місцеположення ", nasaBot, keyboardFactory.astroInfoMenu());
                 break;
             default:
                 manager.sendTextMessage(chatId
@@ -198,7 +202,7 @@ public class CallbackHandler implements AbstractHandler {
     }
 
     private void sendLatestNews(Long chatId, NasaBot nasaBot) {
-        List<String> news = newsRSS.constructRequest().orElseGet(() -> List.of("Новин немає"));
+        List<String> news = newsRSS.constructResponse().orElseGet(() -> List.of("Новин немає"));
 
         StringBuilder newsMessage = new StringBuilder("Останні новини NASA:\n\n");
         for (String item : news) {

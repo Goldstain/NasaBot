@@ -31,7 +31,7 @@ public class NewsRSS implements NasaService {
     }
 
     @Override
-    public Optional<List<String>> constructRequest(String... options) {
+    public Optional<List<String>> constructResponse(String... options) {
         List<String> news = new ArrayList<>();
 
         try {

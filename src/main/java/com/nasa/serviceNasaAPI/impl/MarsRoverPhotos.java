@@ -27,7 +27,7 @@ public class MarsRoverPhotos implements NasaService {
     }
 
     @Override
-    public Optional<String> constructRequest(String... rovers) {
+    public Optional<String> constructResponse(String... rovers) {
         String roverInfo;
         if (rovers != null && rovers.length > 0) {
             roverInfo = getManifestResponse(rovers[0]).toString();

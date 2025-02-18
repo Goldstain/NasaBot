@@ -4,10 +4,12 @@ import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
 import com.nasa.serviceBot.handler.AbstractHandler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
+import com.nasa.serviceNasaAPI.impl.AstroInfo;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.time.LocalDate;
@@ -21,12 +23,14 @@ public class CommandHandler implements AbstractHandler {
 
     MainManager manager;
     KeyboardFactory keyboardFactory;
+    AstroInfo astroInfo;
     public static String currentDate = "";
 
     @Autowired
-    public CommandHandler(MainManager manager, KeyboardFactory keyboardFactory) {
+    public CommandHandler(MainManager manager, KeyboardFactory keyboardFactory, AstroInfo astroInfo) {
         this.manager = manager;
         this.keyboardFactory = keyboardFactory;
+        this.astroInfo = astroInfo;
     }
 
     @Override
@@ -34,6 +38,21 @@ public class CommandHandler implements AbstractHandler {
         var message = update.getMessage();
         var command = message.getText();
         var chatId = message.getChatId();
+
+        if (message.hasLocation()) {
+            Location location = message.getLocation();
+            Optional<String> astroInfoResult
+                    = astroInfo.constructResponse(location.getLatitude().toString()
+                    , location.getLongitude().toString());
+
+            var result = astroInfoResult.isPresent()
+                    ? astroInfoResult.get()
+                    : "Невдалося отримати інформацію, спробуйте пізніше";
+
+            manager.sendTextMessage(chatId, astroInfoResult.get(), nasaBot, keyboardFactory.mainMenuButton());
+            return;
+        }
+
 
         switch (command) {
             case "/start":

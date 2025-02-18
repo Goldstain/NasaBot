@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -29,17 +30,17 @@ public class MainManager {
     }
 
     public void sendTextMessage(Long chatId, String message, NasaBot nasaBot
-            , InlineKeyboardMarkup... inlineKeyboardMarkup) {
+            , ReplyKeyboard... keyboards) {
         SendMessage sendMessage = new SendMessage();
 
-        if (inlineKeyboardMarkup.length == 0) {
+        if (keyboards.length == 0) {
             sendMessage.setChatId(chatId);
             sendMessage.setText(message);
 
         } else {
             sendMessage.setChatId(chatId);
             sendMessage.setText(message);
-            sendMessage.setReplyMarkup(inlineKeyboardMarkup[0]);
+            sendMessage.setReplyMarkup(keyboards[0]);
         }
         try {
             nasaBot.execute(sendMessage);

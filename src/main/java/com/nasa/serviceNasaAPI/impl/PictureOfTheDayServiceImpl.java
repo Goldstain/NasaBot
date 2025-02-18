@@ -39,7 +39,7 @@ public class PictureOfTheDayServiceImpl implements NasaService {
     }
 
     @Override
-    public Optional<List<String>> constructRequest(String... options) {
+    public Optional<List<String>> constructResponse(String... options) {
         if (lastMediaResponse.isPresent()) {
             return lastMediaResponse;
         }
