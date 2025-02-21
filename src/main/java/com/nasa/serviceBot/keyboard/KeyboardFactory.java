@@ -103,6 +103,7 @@ public class KeyboardFactory {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setResizeKeyboard(true);
         keyboardMarkup.setOneTimeKeyboard(true);
+        keyboardMarkup.setInputFieldPlaceholder("-45.32 37.234");
 
         KeyboardButton getAstroInfoByIP = new KeyboardButton("Отримати по Вашому IP");
         getAstroInfoByIP.setRequestLocation(true);

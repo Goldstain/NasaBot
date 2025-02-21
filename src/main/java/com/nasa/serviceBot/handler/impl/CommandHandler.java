@@ -2,7 +2,7 @@ package com.nasa.serviceBot.handler.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.handler.AbstractHandler;
+import com.nasa.serviceBot.handler.Handler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.impl.AstroInfo;
 import lombok.AccessLevel;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CommandHandler implements AbstractHandler {
+public class CommandHandler implements Handler {
 
     MainManager manager;
     KeyboardFactory keyboardFactory;
@@ -93,7 +93,7 @@ public class CommandHandler implements AbstractHandler {
 
 
     private boolean isCorrectCoordinates(String coordinates) {
-        String regex = "^-?(90|[0-8]?[0-9])(?:[.,][0-9]+)?\\s+-?-?(180|1[0-7][0-9]|[0-9]?[0-9])(?:[.,][0-9]+)?$";
+        String regex = "^-?(90|[0-8]?[0-9])(?:[.,][0-9]+)?\\s+-?(180|1[0-7][0-9]|[0-9]?[0-9])(?:[.,][0-9]+)?$";
         return Pattern.matches(regex, coordinates);
     }
 

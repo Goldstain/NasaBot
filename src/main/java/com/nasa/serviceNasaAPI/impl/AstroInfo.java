@@ -42,8 +42,6 @@ public class AstroInfo implements NasaService {
                 , nasaConfig.getAstro_info_api_key()
                 , options[0]
                 , options[1]);
-        System.out.println("###############################");
-        System.out.println(url);
         var astroInfoDTO = webClient.get()
                 .uri(url)
                 .retrieve()

@@ -9,7 +9,6 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -99,10 +98,10 @@ public class PictureOfTheDayServiceImpl implements NasaService {
         return jsonNode.isArray() && !jsonNode.isNull() ? jsonNode.get(0) : jsonNode;
     }
 
-    @Scheduled(cron = "0 30 8 * * *")
-    public void setLastMediaResponse() {
-        lastMediaResponse = Optional.empty();
-    }
+//    @Scheduled(cron = "0 30 8 * * *")
+//    public void setLastMediaResponse() {
+//        lastMediaResponse = Optional.empty();
+//    }
 
 
 }

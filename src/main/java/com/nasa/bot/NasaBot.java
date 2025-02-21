@@ -1,6 +1,7 @@
 package com.nasa.bot;
 
 import com.nasa.config.BotConfig;
+import com.nasa.exception.UpdateNotFoundException;
 import com.nasa.serviceBot.UpdateDispatcher;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -19,8 +20,8 @@ public class NasaBot extends TelegramLongPollingBot {
     DefaultBotOptions defaultBotOptions;
 
     @Autowired
-    public NasaBot( BotConfig botConfig, UpdateDispatcher updateDispatcher) {
-        super( botConfig.getToken());
+    public NasaBot(BotConfig botConfig, UpdateDispatcher updateDispatcher) {
+        super(botConfig.getToken());
         this.botConfig = botConfig;
         this.updateDispatcher = updateDispatcher;
     }
@@ -28,7 +29,11 @@ public class NasaBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        updateDispatcher.handleUpdate(update, this);
+        try {
+            updateDispatcher.handleUpdate(update, this);
+        } catch (UpdateNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

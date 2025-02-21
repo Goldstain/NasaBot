@@ -4,7 +4,7 @@ import com.nasa.bot.NasaBot;
 import com.nasa.config.NasaConfig;
 import com.nasa.config.NasaInfo;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.handler.AbstractHandler;
+import com.nasa.serviceBot.handler.Handler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.dto.Photos;
 import com.nasa.serviceNasaAPI.dto.PhotosByDateCamera;
@@ -28,7 +28,7 @@ import java.util.TimerTask;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CallbackHandler implements AbstractHandler {
+public class CallbackHandler implements Handler {
 
     MainManager manager;
     PictureOfTheDayServiceImpl pictureOfTheDayService;
@@ -69,7 +69,8 @@ public class CallbackHandler implements AbstractHandler {
 
         switch (button) {
             case "help":
-
+                manager.sendTextMessage(chatId
+                        , "Ось список доступних команд:\n/start - Почати\n/help - Допомога", nasaBot);
                 break;
             case "mainMenu":
                 sendStartMenu(chatId, nasaBot);

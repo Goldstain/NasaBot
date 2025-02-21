@@ -1,6 +1,8 @@
 package com.nasa.serviceBot;
 
 import com.nasa.bot.NasaBot;
+import com.nasa.exception.UpdateNotFoundException;
+import com.nasa.serviceBot.handler.Handler;
 import com.nasa.serviceBot.handler.impl.CallbackHandler;
 import com.nasa.serviceBot.handler.impl.CommandHandler;
 import lombok.AccessLevel;
@@ -13,8 +15,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UpdateDispatcher {
 
-    CommandHandler commandHandler;
-    CallbackHandler callbackHandler;
+    Handler commandHandler;
+    Handler callbackHandler;
 
 
     @Autowired
@@ -23,7 +25,7 @@ public class UpdateDispatcher {
         this.callbackHandler = callbackHandler;
     }
 
-    public void handleUpdate(Update update, NasaBot nasaBot) {
+    public void handleUpdate(Update update, NasaBot nasaBot) throws UpdateNotFoundException {
         if (update.hasMessage() || update.hasCallbackQuery()) {
             if (update.hasCallbackQuery()) {
                 callbackHandler.useUpdate(update, nasaBot);
@@ -31,7 +33,7 @@ public class UpdateDispatcher {
                 commandHandler.useUpdate(update, nasaBot);
             }
         } else {
-            System.out.println("Отримано оновлення без повідомлення або callback-запиту.");
+            throw new UpdateNotFoundException("Отримано оновлення без повідомлення або callback-запиту.");
         }
     }
 
