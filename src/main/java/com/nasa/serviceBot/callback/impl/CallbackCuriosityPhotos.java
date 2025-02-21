@@ -1,8 +1,8 @@
-package com.nasa.serviceBot.command.impl;
+package com.nasa.serviceBot.callback.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.AbstractCallbackCommand;
+import com.nasa.serviceBot.callback.AbstractCallback;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import static com.nasa.serviceBot.handler.impl.CallbackHandler.availableDataPhotos;
 
 @Component
-public class CuriosityPhotosCommand extends AbstractCallbackCommand {
+public class CallbackCuriosityPhotos extends AbstractCallback {
 
 
     private final KeyboardFactory keyboardFactory;
 
     @Autowired
-    public CuriosityPhotosCommand(MainManager manager, KeyboardFactory keyboardFactory) {
+    public CallbackCuriosityPhotos(MainManager manager, KeyboardFactory keyboardFactory) {
         super(manager, "curiosityPhotos");
         this.keyboardFactory = keyboardFactory;
     }

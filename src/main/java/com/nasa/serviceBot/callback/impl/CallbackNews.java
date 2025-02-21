@@ -1,8 +1,8 @@
-package com.nasa.serviceBot.command.impl;
+package com.nasa.serviceBot.callback.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.AbstractCallbackCommand;
+import com.nasa.serviceBot.callback.AbstractCallback;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.impl.NewsRSS;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class NewsCommand extends AbstractCallbackCommand {
+public class CallbackNews extends AbstractCallback {
 
     private final NewsRSS newsRSS;
     private final KeyboardFactory keyboardFactory;
 
     @Autowired
-    public NewsCommand(MainManager manager, NewsRSS newsRSS, KeyboardFactory keyboardFactory) {
+    public CallbackNews(MainManager manager, NewsRSS newsRSS, KeyboardFactory keyboardFactory) {
         super(manager, "news");
         this.newsRSS = newsRSS;
         this.keyboardFactory = keyboardFactory;

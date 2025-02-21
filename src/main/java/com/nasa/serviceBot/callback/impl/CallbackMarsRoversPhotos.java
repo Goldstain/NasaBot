@@ -1,19 +1,19 @@
-package com.nasa.serviceBot.command.impl;
+package com.nasa.serviceBot.callback.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.config.NasaInfo;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.AbstractCallbackCommand;
+import com.nasa.serviceBot.callback.AbstractCallback;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MarsRoversPhotosCommand extends AbstractCallbackCommand {
+public class CallbackMarsRoversPhotos extends AbstractCallback {
 
     private final NasaInfo nasaInfo;
     private final KeyboardFactory keyboardFactory;
 
-    public MarsRoversPhotosCommand(MainManager manager, NasaInfo nasaInfo, KeyboardFactory keyboardFactory) {
+    public CallbackMarsRoversPhotos(MainManager manager, NasaInfo nasaInfo, KeyboardFactory keyboardFactory) {
         super(manager, "marsRoversPhotos");
         this.nasaInfo = nasaInfo;
         this.keyboardFactory = keyboardFactory;

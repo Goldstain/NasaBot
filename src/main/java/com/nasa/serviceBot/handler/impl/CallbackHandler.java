@@ -1,9 +1,9 @@
 package com.nasa.serviceBot.handler.impl;
 
 import com.nasa.bot.NasaBot;
-import com.nasa.exception.CallbackCommandNotFoundException;
+import com.nasa.exception.CallbackNotFoundException;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.CallbackCommand;
+import com.nasa.serviceBot.callback.Callback;
 import com.nasa.serviceBot.handler.Handler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.dto.Photos;
@@ -21,10 +21,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @Service
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CallbackHandler implements Handler {
 
-    List<CallbackCommand> commands;
+    List<Callback> commands;
     MainManager manager;
     MarsRoverPhotos marsRoverPhotos;
     KeyboardFactory keyboardFactory;
@@ -32,7 +32,7 @@ public class CallbackHandler implements Handler {
 
 
     @Autowired
-    public CallbackHandler(List<CallbackCommand> commands
+    public CallbackHandler(List<Callback> commands
             , MainManager manager, MarsRoverPhotos marsRoverPhotos, KeyboardFactory keyboardFactory) {
         this.commands = commands;
         this.manager = manager;
@@ -50,83 +50,20 @@ public class CallbackHandler implements Handler {
             sendCameraPhotos(button, chatId, nasaBot);
             return;
         }
-        CallbackCommand callbackCommand;
+        Callback callback;
         try {
-            callbackCommand = commands.stream()
-                    .filter(command -> command.getNameCommand().equals(button))
+            callback = commands.stream()
+                    .filter(command -> command.getNameCallback().equals(button))
                     .findFirst()
-                    .orElseThrow(() -> new CallbackCommandNotFoundException());
-            callbackCommand.execute(chatId, nasaBot);
-        } catch (CallbackCommandNotFoundException e) {
+                    .orElseThrow(() -> new CallbackNotFoundException());
+            callback.execute(chatId, nasaBot);
+        } catch (CallbackNotFoundException e) {
             e.printStackTrace();
             manager.sendTextMessage(chatId, "Невідома кнопка", nasaBot);
             waitAndSendStartMenu(nasaBot, chatId);
         }
     }
 
-//        switch (button) {
-//            case "help":
-//                manager.sendTextMessage(chatId
-//                        , "Ось список доступних команд:\n/start - Почати\n/help - Допомога", nasaBot);
-//                break;
-//            case "mainMenu":
-//                sendStartMenu(chatId, nasaBot);
-//                break;
-//            case "news":
-//                sendLatestNews(chatId, nasaBot);
-//                break;
-//            case "photo":
-//                var media = pictureOfTheDayService.constructResponse();
-//                sendPhotoOfTheDay(nasaBot, media, chatId);
-//                break;
-//            case "photoRandom":
-//                var mediaRandom = pictureOfTheDayRandomService.constructResponse();
-//                sendPhotoOfTheDay(nasaBot, mediaRandom, chatId);
-//                break;
-//            case "marsRoversPhotos":
-//                manager.sendTextMessage(chatId, nasaInfo.getRoversInfo(), nasaBot, keyboardFactory.roversMenu());
-//                break;
-//            case "spirit":
-//            case "opportunity":
-//            case "curiosity":
-//                var roverInfo = marsRoverPhotos.constructResponse(button);
-//                sendRoverInfo(nasaBot, roverInfo, chatId);
-//                break;
-//            case "curiosityPhotos":
-//                var description = "Введіть доступну дату в діапазоні від \n" + availableDataPhotos[0] + " до "
-//                        + availableDataPhotos[1] + "\nВ форматі РРРР-ММ-ДД\nНаприклад: 2022-08-24";
-//                manager.sendTextMessage(chatId, description, nasaBot, keyboardFactory.returnToRoversMenu());
-//                break;
-//            case "astroInfo":
-//                manager.sendTextMessage(chatId, "\uD83C\uDF13   Це інформація про денний цикл Сонця і Місяця в залежності від " +
-//                        "Вашого місцеположення ", nasaBot, keyboardFactory.astroInfoMenu());
-//                break;
-//            default:
-//                manager.sendTextMessage(chatId
-//                        , "Невідома кнопка", nasaBot);
-//                waitAndSendStartMenu(nasaBot, chatId);
-//        }
-//
-//    }
-
-
-//    private void sendPhotoOfTheDay(NasaBot nasaBot, Optional<List<String>> media, Long chatId) {
-//        var descriptions = media.get();
-//
-//        if (media.isPresent() && descriptions.size() > 0) {
-//            if (descriptions.getFirst().equals("image")) {
-//                manager.sendPhoto(chatId, descriptions.getLast()
-//                        , "\uD83D\uDCF8  " + descriptions.get(1), nasaBot);
-//            } else if (descriptions.getFirst().equals("video")) {
-//                manager.sendVideo(chatId, descriptions.getLast()
-//                        , "\uD83D\uDCF8  " + descriptions.get(1), nasaBot);
-//            }
-//            manager.sendTextMessage(chatId, descriptions.get(2), nasaBot
-//                    , keyboardFactory.mainMenuButton());
-//        } else {
-//            manager.sendTextMessage(chatId, "Не вдалося отримати фото дня, спробуйте іншим разом", nasaBot);
-//        }
-//    }
 
     private void waitAndSendStartMenu(NasaBot nasaBot, Long chatId) {
         new Timer().schedule(new TimerTask() {
@@ -149,35 +86,6 @@ public class CallbackHandler implements Handler {
         manager.sendCallbackQuery(sendMessage, nasaBot);
     }
 
-//    private void sendRoverInfo(NasaBot nasaBot, Optional<String> roverInfoOpt, Long chatId) {
-//        String roverInfo;
-//        InlineKeyboardMarkup keyboardMarkup = keyboardFactory.returnToRoversMenu();
-//        if (roverInfoOpt.isPresent()) {
-//            roverInfo = roverInfoOpt.get();
-//        } else {
-//            roverInfo = "Не вдалося знайти інформацію по цьому марсоходу";
-//        }
-//
-//        if (roverInfo.contains("Curiosity")) {
-//            keyboardMarkup = keyboardFactory.roverPhotoButton(keyboardMarkup);
-//        }
-//        setAvailableDataPhotos(roverInfo);
-//
-//        manager.sendTextMessage(chatId, roverInfo, nasaBot, keyboardMarkup);
-//    }
-//
-//
-//    private void setAvailableDataPhotos(String roverInfo) {
-//        var start = "Прибув на Марс: ";
-//        var end = "Остання дата отриманих знімків: ";
-//
-//        int startDate = roverInfo.indexOf(start) + start.length();
-//        int endDate = roverInfo.indexOf(end) + end.length();
-//
-//        availableDataPhotos[0] = roverInfo.substring(startDate, startDate + 10);
-//        availableDataPhotos[1] = roverInfo.substring(endDate, endDate + 10);
-//    }
-
 
     private void sendCameraPhotos(String button, Long chatId, NasaBot nasaBot) {
         var camera = button.substring(0, button.lastIndexOf(":roverCamera"));
@@ -198,17 +106,5 @@ public class CallbackHandler implements Handler {
         manager.sendTextMessage(
                 chatId, "\uD83D\uDCF9   Вибрати іншу камеру     \uD83D\uDD3D", nasaBot, keyboardFactory.availableCamerasKeyboard(earthDate));
     }
-
-//    private void sendLatestNews(Long chatId, NasaBot nasaBot) {
-//        List<String> news = newsRSS.constructResponse().orElseGet(() -> List.of("Новин немає"));
-//
-//        StringBuilder newsMessage = new StringBuilder("Останні новини NASA:\n\n");
-//        for (String item : news) {
-//            newsMessage.append(item).append("\n\n");
-//        }
-//
-//        manager.sendTextMessage(chatId, newsMessage.toString(), nasaBot, keyboardFactory.mainMenuButton());
-//    }
-
 
 }

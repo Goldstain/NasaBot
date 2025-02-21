@@ -1,8 +1,8 @@
-package com.nasa.serviceBot.command.impl;
+package com.nasa.serviceBot.callback.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.AbstractCallbackCommand;
+import com.nasa.serviceBot.callback.AbstractCallback;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +14,13 @@ import java.util.Optional;
 import static com.nasa.serviceBot.handler.impl.CallbackHandler.availableDataPhotos;
 
 @Component
-public class CuriosityCommand extends AbstractCallbackCommand {
+public class CallbackCuriosity extends AbstractCallback {
 
     private final MarsRoverPhotos marsRoverPhotos;
     private final KeyboardFactory keyboardFactory;
 
     @Autowired
-    public CuriosityCommand(MainManager manager, MarsRoverPhotos marsRoverPhotos, KeyboardFactory keyboardFactory) {
+    public CallbackCuriosity(MainManager manager, MarsRoverPhotos marsRoverPhotos, KeyboardFactory keyboardFactory) {
         super(manager, "curiosity");
         this.marsRoverPhotos = marsRoverPhotos;
         this.keyboardFactory = keyboardFactory;
@@ -29,7 +29,7 @@ public class CuriosityCommand extends AbstractCallbackCommand {
 
     @Override
     public void execute(Long chatId, NasaBot nasaBot) {
-        var roverInfo = marsRoverPhotos.constructResponse(this.nameCommand);
+        var roverInfo = marsRoverPhotos.constructResponse(this.nameCallback);
         sendRoverInfo(nasaBot, roverInfo, chatId);
     }
 

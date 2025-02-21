@@ -1,16 +1,16 @@
-package com.nasa.serviceBot.command.impl;
+package com.nasa.serviceBot.callback.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.AbstractCallbackCommand;
+import com.nasa.serviceBot.callback.AbstractCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HelpCommand extends AbstractCallbackCommand {
+public class CallbackHelp extends AbstractCallback {
 
     @Autowired
-    public HelpCommand(MainManager manager) {
+    public CallbackHelp(MainManager manager) {
         super(manager, "help");
     }
 

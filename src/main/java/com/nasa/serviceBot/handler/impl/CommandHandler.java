@@ -1,7 +1,9 @@
 package com.nasa.serviceBot.handler.impl;
 
 import com.nasa.bot.NasaBot;
+import com.nasa.exception.CommandNotFoundException;
 import com.nasa.serviceBot.MainManager;
+import com.nasa.serviceBot.command.Command;
 import com.nasa.serviceBot.handler.Handler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.impl.AstroInfo;
@@ -15,6 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -22,13 +25,16 @@ import java.util.regex.Pattern;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CommandHandler implements Handler {
 
+    List<Command> commands;
     MainManager manager;
     KeyboardFactory keyboardFactory;
     AstroInfo astroInfo;
     public static String currentDate = "";
 
     @Autowired
-    public CommandHandler(MainManager manager, KeyboardFactory keyboardFactory, AstroInfo astroInfo) {
+    public CommandHandler(List<Command> commands, MainManager manager
+            , KeyboardFactory keyboardFactory, AstroInfo astroInfo) {
+        this.commands = commands;
         this.manager = manager;
         this.keyboardFactory = keyboardFactory;
         this.astroInfo = astroInfo;
@@ -37,44 +43,37 @@ public class CommandHandler implements Handler {
     @Override
     public void useUpdate(Update update, NasaBot nasaBot) {
         var message = update.getMessage();
-        var command = message.getText();
+        var textCommand = message.getText();
         var chatId = message.getChatId();
 
         if (message.hasLocation()) {
             sendAstroInfoByIP(nasaBot, message, chatId);
             return;
-        } else if (isCorrectCoordinates(command)) {
-            sendAstroInfoByCoordinates(chatId, command, nasaBot);
+        } else if (isCorrectCoordinates(textCommand)) {
+            sendAstroInfoByCoordinates(chatId, textCommand, nasaBot);
+            return;
+        } else if (isCorrectDate(textCommand).isPresent()) {
+            var keyboard = keyboardFactory.availableCamerasKeyboard(textCommand);
+            var description = keyboard.getKeyboard().size() == 1 ?
+                    textCommand.concat("  немає доступних камер") :
+                    "Це список камер марсоходу доступних " + textCommand + ", обери камеру";
+            currentDate = textCommand;
+            manager.sendTextMessage(chatId, description
+                    , nasaBot, keyboard);
             return;
         }
 
-
-        switch (command) {
-            case "/start":
-                var firstName = message.getFrom().getFirstName();
-                manager.sendWelcomeMessage(chatId, firstName, nasaBot);
-                break;
-            case "/help":
-                manager.sendTextMessage(chatId
-                        , "Ось список доступних команд:\n/start - Почати\n/help - Допомога", nasaBot);
-                break;
-            case "Отримати по координатам":
-                manager.sendTextMessage(chatId, "Введіть широту і довготу за зразком:\n" +
-                        "50 31 або -50.004505 -36.233709", nasaBot, keyboardFactory.mainMenuButton());
-                break;
-            default:
-                if (isCorrectDate(command).isPresent()) {
-                    var keyboard = keyboardFactory.availableCamerasKeyboard(command);
-                    var description = keyboard.getKeyboard().size() == 1 ?
-                            command.concat("  немає доступних камер") :
-                            "Це список камер марсоходу доступних " + command + ", обери камеру";
-                    currentDate = command;
-                    manager.sendTextMessage(chatId, description
-                            , nasaBot, keyboard);
-                } else {
-                    manager.sendTextMessage(chatId
-                            , "Невідома команда. Напиши /help або повернись до меню ", nasaBot);
-                }
+        Command command;
+        try {
+            command = commands.stream()
+                    .filter(com -> com.getNameCommand().equals(textCommand))
+                    .findFirst()
+                    .orElseThrow(() -> new CommandNotFoundException());
+            command.execute(message, nasaBot);
+        } catch (CommandNotFoundException e) {
+            e.printStackTrace();
+            manager.sendTextMessage(chatId
+                    , "Невідома команда. Напиши /help або повернись до меню ", nasaBot);
         }
     }
 
@@ -93,7 +92,7 @@ public class CommandHandler implements Handler {
 
 
     private boolean isCorrectCoordinates(String coordinates) {
-        String regex = "^-?(90|[0-8]?[0-9])(?:[.,][0-9]+)?\\s+-?(180|1[0-7][0-9]|[0-9]?[0-9])(?:[.,][0-9]+)?$";
+        String regex = "^-?(90(\\.0+)?|[0-8]?[0-9](\\.[0-9]+)?)\\s+-?(180(\\.0+)?|1[0-7][0-9](\\.[0-9]+)?|[0-9]?[0-9](\\.[0-9]+)?)$";
         return Pattern.matches(regex, coordinates);
     }
 

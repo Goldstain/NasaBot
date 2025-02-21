@@ -1,8 +1,8 @@
-package com.nasa.serviceBot.command.impl;
+package com.nasa.serviceBot.callback.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.AbstractCallbackCommand;
+import com.nasa.serviceBot.callback.AbstractCallback;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import java.util.Optional;
 import static com.nasa.serviceBot.handler.impl.CallbackHandler.availableDataPhotos;
 
 @Component
-public class SpiritCommand extends AbstractCallbackCommand {
+public class CallbackOpportunity extends AbstractCallback {
 
     private final MarsRoverPhotos marsRoverPhotos;
     private final KeyboardFactory keyboardFactory;
 
     @Autowired
-    public SpiritCommand(MainManager manager, MarsRoverPhotos marsRoverPhotos, KeyboardFactory keyboardFactory) {
-        super(manager, "spirit");
+    public CallbackOpportunity(MainManager manager, MarsRoverPhotos marsRoverPhotos, KeyboardFactory keyboardFactory) {
+        super(manager, "opportunity");
         this.marsRoverPhotos = marsRoverPhotos;
         this.keyboardFactory = keyboardFactory;
     }
@@ -29,7 +29,7 @@ public class SpiritCommand extends AbstractCallbackCommand {
 
     @Override
     public void execute(Long chatId, NasaBot nasaBot) {
-        var roverInfo = marsRoverPhotos.constructResponse(this.nameCommand);
+        var roverInfo = marsRoverPhotos.constructResponse(this.nameCallback);
         sendRoverInfo(nasaBot, roverInfo, chatId);
     }
 
@@ -59,3 +59,4 @@ public class SpiritCommand extends AbstractCallbackCommand {
         availableDataPhotos[1] = roverInfo.substring(endDate, endDate + 10);
     }
 }
+

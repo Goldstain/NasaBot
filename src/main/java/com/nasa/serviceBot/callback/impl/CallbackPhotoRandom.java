@@ -1,8 +1,8 @@
-package com.nasa.serviceBot.command.impl;
+package com.nasa.serviceBot.callback.impl;
 
 import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.MainManager;
-import com.nasa.serviceBot.command.AbstractCallbackCommand;
+import com.nasa.serviceBot.callback.AbstractCallback;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.impl.PictureOfTheDayRandomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class PhotoRandomCommand extends AbstractCallbackCommand {
+public class CallbackPhotoRandom extends AbstractCallback {
 
     private final PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService;
     private final KeyboardFactory keyboardFactory;
 
     @Autowired
-    public PhotoRandomCommand(MainManager manager, PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService, KeyboardFactory keyboardFactory) {
+    public CallbackPhotoRandom(MainManager manager, PictureOfTheDayRandomServiceImpl pictureOfTheDayRandomService, KeyboardFactory keyboardFactory) {
         super(manager, "photoRandom");
         this.pictureOfTheDayRandomService = pictureOfTheDayRandomService;
         this.keyboardFactory = keyboardFactory;
