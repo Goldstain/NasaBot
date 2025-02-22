@@ -1,0 +1,135 @@
+2025-02-22 18:55:23 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 15748 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-22 18:55:23 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-22 18:55:24 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-22 18:55:25 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-22 18:55:25 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-22 18:55:25 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-22 18:55:25 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-22 18:55:25 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1328 ms
+2025-02-22 18:55:26 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-22 18:55:26 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-22 18:55:26 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-22 18:55:26 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.35 seconds (process running for 4.569)
+2025-02-22 18:56:13 [nasa_s_bot Telegram Executor] INFO  c.n.s.handler.impl.CommandHandler - User: Viacheslav wrote wrong command:  2020-02-02
+2025-02-22 18:57:49 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-22 18:57:49 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-22 19:37:16 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 3288 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-22 19:37:16 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-22 19:37:17 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-22 19:37:17 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-22 19:37:17 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-22 19:37:17 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-22 19:37:18 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-22 19:37:18 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1172 ms
+2025-02-22 19:37:19 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-22 19:37:19 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-22 19:37:19 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-22 19:37:19 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.074 seconds (process running for 3.954)
+2025-02-22 19:55:55 [nasa_s_bot Telegram Executor] ERROR o.t.t.u.DefaultBotSession - Cannot invoke "org.telegram.telegrambots.meta.api.objects.Contact.getPhoneNumber()" because the return value of "org.telegram.telegrambots.meta.api.objects.Message.getContact()" is null
+java.lang.NullPointerException: Cannot invoke "org.telegram.telegrambots.meta.api.objects.Contact.getPhoneNumber()" because the return value of "org.telegram.telegrambots.meta.api.objects.Message.getContact()" is null
+	at com.nasa.serviceBot.UpdateDispatcher.getUserInfo(UpdateDispatcher.java:52)
+	at com.nasa.serviceBot.UpdateDispatcher.handleUpdate(UpdateDispatcher.java:35)
+	at com.nasa.bot.NasaBot.onUpdateReceived(NasaBot.java:35)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312)
+2025-02-22 19:58:36 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-22 19:58:36 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-22 19:58:41 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 4752 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-22 19:58:41 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-22 19:58:42 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-22 19:58:42 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-22 19:58:42 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-22 19:58:42 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-22 19:58:42 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-22 19:58:42 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1147 ms
+2025-02-22 19:58:43 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-22 19:58:43 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-22 19:58:43 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-22 19:58:43 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.122 seconds (process running for 4.032)
+2025-02-22 19:58:55 [nasa_s_bot Telegram Executor] ERROR o.t.t.u.DefaultBotSession - Cannot invoke "org.telegram.telegrambots.meta.api.objects.Location.toString()" because the return value of "org.telegram.telegrambots.meta.api.objects.Message.getLocation()" is null
+java.lang.NullPointerException: Cannot invoke "org.telegram.telegrambots.meta.api.objects.Location.toString()" because the return value of "org.telegram.telegrambots.meta.api.objects.Message.getLocation()" is null
+	at com.nasa.serviceBot.UpdateDispatcher.getUserInfo(UpdateDispatcher.java:53)
+	at com.nasa.serviceBot.UpdateDispatcher.handleUpdate(UpdateDispatcher.java:35)
+	at com.nasa.bot.NasaBot.onUpdateReceived(NasaBot.java:35)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312)
+2025-02-22 19:59:23 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-22 19:59:23 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-22 20:04:47 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 4736 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-22 20:04:47 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-22 20:04:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-22 20:04:48 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-22 20:04:48 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-22 20:04:48 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-22 20:04:48 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-22 20:04:48 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1366 ms
+2025-02-22 20:04:49 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-22 20:04:49 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-22 20:04:49 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-22 20:04:49 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.335 seconds (process running for 4.318)
+2025-02-22 20:04:58 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS /start
+2025-02-22 20:05:25 [nasa_s_bot Telegram Executor] ERROR o.t.t.u.DefaultBotSession - Cannot invoke "org.telegram.telegrambots.meta.api.objects.Message.getFrom()" because "message" is null
+java.lang.NullPointerException: Cannot invoke "org.telegram.telegrambots.meta.api.objects.Message.getFrom()" because "message" is null
+	at com.nasa.serviceBot.UpdateDispatcher.getUserInfo(UpdateDispatcher.java:48)
+	at com.nasa.serviceBot.UpdateDispatcher.handleUpdate(UpdateDispatcher.java:35)
+	at com.nasa.bot.NasaBot.onUpdateReceived(NasaBot.java:35)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312)
+2025-02-22 20:06:17 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS /start
+2025-02-22 20:06:28 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS /start
+2025-02-22 20:06:36 [nasa_s_bot Telegram Executor] ERROR o.t.t.u.DefaultBotSession - Cannot invoke "org.telegram.telegrambots.meta.api.objects.Message.getFrom()" because "message" is null
+java.lang.NullPointerException: Cannot invoke "org.telegram.telegrambots.meta.api.objects.Message.getFrom()" because "message" is null
+	at com.nasa.serviceBot.UpdateDispatcher.getUserInfo(UpdateDispatcher.java:48)
+	at com.nasa.serviceBot.UpdateDispatcher.handleUpdate(UpdateDispatcher.java:35)
+	at com.nasa.bot.NasaBot.onUpdateReceived(NasaBot.java:35)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312)
+2025-02-22 20:16:17 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-22 20:16:17 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-22 20:23:15 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 404 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-22 20:23:15 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-22 20:23:17 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-22 20:23:17 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-22 20:23:17 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-22 20:23:17 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-22 20:23:17 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-22 20:23:17 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1097 ms
+2025-02-22 20:23:18 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-22 20:23:18 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-22 20:23:18 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-22 20:23:18 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 2.942 seconds (process running for 3.817)
+2025-02-22 20:23:33 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: /start
+2025-02-22 20:28:41 [nasa_s_bot Telegram Executor] INFO  c.n.s.handler.impl.CommandHandler - User: Viacheslav wrote wrong command:  45
+2025-02-22 20:28:41 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 45
+2025-02-22 20:29:06 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: /help
+2025-02-22 20:30:05 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 2025-01-01
+2025-02-22 20:30:18 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 2025-01-03
+2025-02-22 20:30:29 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 2025-01-02
+2025-02-22 20:30:38 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 2025-01-09
+2025-02-22 20:30:45 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 2025-01-06
+2025-02-22 20:30:58 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 2025-01-18
+2025-02-22 20:31:21 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: 2025-01-25
+2025-02-22 20:32:13 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: /help
+2025-02-22 20:32:15 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: /start
+2025-02-22 20:32:36 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 Viacheslav null HowardRoarkS message: /start
+2025-02-22 20:33:09 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-22 20:33:09 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-22 20:33:39 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 1364 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-22 20:33:39 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-22 20:33:40 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-22 20:33:40 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-22 20:33:40 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-22 20:33:40 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-22 20:33:40 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-22 20:33:40 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1241 ms
+2025-02-22 20:33:41 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-22 20:33:41 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-22 20:33:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-22 20:33:41 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.208 seconds (process running for 4.239)
+2025-02-22 20:35:20 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: 50.444 36.5
+2025-02-22 20:36:56 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-22 20:36:56 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete

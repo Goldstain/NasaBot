@@ -9,6 +9,8 @@ import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.impl.AstroInfo;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Location;
@@ -24,6 +26,8 @@ import java.util.regex.Pattern;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CommandHandler implements Handler {
+
+    Logger logger = LoggerFactory.getLogger(CommandHandler.class);
 
     List<Command> commands;
     MainManager manager;
@@ -71,7 +75,7 @@ public class CommandHandler implements Handler {
                     .orElseThrow(() -> new CommandNotFoundException());
             command.execute(message, nasaBot);
         } catch (CommandNotFoundException e) {
-            e.printStackTrace();
+            logger.info("User: " + message.getFrom().getFirstName() + " wrote wrong command:  " + textCommand);
             manager.sendTextMessage(chatId
                     , "Невідома команда. Напиши /help або повернись до меню ", nasaBot);
         }
@@ -120,7 +124,7 @@ public class CommandHandler implements Handler {
         try {
             date = LocalDate.parse(command);
         } catch (DateTimeParseException e) {
-            e.printStackTrace();
+            logger.warn(e.getMessage() + " Wrong LocalDate.parse(" + command + ")");
             return Optional.empty();
         }
         LocalDate startDate = LocalDate.parse(CallbackHandler.availableDataPhotos[0]);

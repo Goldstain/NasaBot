@@ -4,6 +4,8 @@ import com.nasa.bot.NasaBot;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -21,6 +23,8 @@ import java.util.List;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MainManager {
+
+    Logger logger = LoggerFactory.getLogger(MainManager.class);
 
     KeyboardFactory keyboardFactory;
 
@@ -45,7 +49,7 @@ public class MainManager {
         try {
             nasaBot.execute(sendMessage);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -54,7 +58,7 @@ public class MainManager {
         try {
             nasaBot.execute(message);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -80,7 +84,7 @@ public class MainManager {
         try {
             nasaBot.execute(sendPhoto);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
     }
@@ -96,7 +100,7 @@ public class MainManager {
         try {
             nasaBot.execute(sendPhoto);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
     }
@@ -123,7 +127,7 @@ public class MainManager {
             try {
                 nasaBot.execute(sendPreviewPhoto);
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         } else {
             SendVideo sendVideo = SendVideo.builder()
@@ -134,24 +138,10 @@ public class MainManager {
             try {
                 nasaBot.execute(sendVideo);
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
 
     }
-
-//    public void sendMainMenuButton(Long chatId, InlineKeyboardMarkup keyboard, NasaBot nasaBot) {
-//        var sendMessage = SendMessage.builder()
-//                .chatId(chatId)
-//                .replyMarkup(keyboard)
-//                .text("\u200B")
-//                .build();
-//        try {
-//            nasaBot.execute(sendMessage);
-//        } catch (TelegramApiException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 
 }

@@ -11,6 +11,8 @@ import com.nasa.serviceNasaAPI.dto.PhotosByDateCamera;
 import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -23,6 +25,8 @@ import java.util.TimerTask;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CallbackHandler implements Handler {
+
+    Logger logger = LoggerFactory.getLogger(CallbackHandler.class);
 
     List<Callback> commands;
     MainManager manager;
@@ -58,7 +62,8 @@ public class CallbackHandler implements Handler {
                     .orElseThrow(() -> new CallbackNotFoundException());
             callback.execute(chatId, nasaBot);
         } catch (CallbackNotFoundException e) {
-            e.printStackTrace();
+            logger.error(update.getCallbackQuery().getData()
+                    + " - button not found");
             manager.sendTextMessage(chatId, "Невідома кнопка", nasaBot);
             waitAndSendStartMenu(nasaBot, chatId);
         }

@@ -8,6 +8,8 @@ import com.nasa.serviceNasaAPI.NasaService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -20,6 +22,8 @@ import java.util.Optional;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PictureOfTheDayServiceImpl implements NasaService {
+
+    Logger logger = LoggerFactory.getLogger(PictureOfTheDayServiceImpl.class);
 
     NasaConfig nasaConfig;
     WebClient webClient;
@@ -81,13 +85,13 @@ public class PictureOfTheDayServiceImpl implements NasaService {
 
             return Optional.of(media);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return Optional.empty();
         }
     }
 
     protected String getJsonValue(JsonNode jsonNode, String key) {
-        return jsonNode.has(key) && !jsonNode.get(key).isNull() ? jsonNode.get(key).asText() : "N/A";
+        return jsonNode.has(key) && !jsonNode.get(key).isNull() ? jsonNode.get(key).asText() : " ";
     }
 
     protected String translator(String text) {

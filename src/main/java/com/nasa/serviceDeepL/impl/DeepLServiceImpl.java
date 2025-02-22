@@ -6,12 +6,16 @@ import com.nasa.config.DeepLConfig;
 import com.nasa.serviceDeepL.DeepLService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DeepLServiceImpl implements DeepLService {
+
+    Logger logger = LoggerFactory.getLogger(DeepLServiceImpl.class);
 
     DeepLConfig deepLConfig;
     Translator translator;
@@ -30,7 +34,7 @@ public class DeepLServiceImpl implements DeepLService {
                     .translateText(text, null, "uk")
                     .getText();
         } catch (DeepLException | InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return translatedText;

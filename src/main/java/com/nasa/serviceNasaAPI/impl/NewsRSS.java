@@ -8,6 +8,8 @@ import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NewsRSS implements NasaService {
+
+    Logger logger = LoggerFactory.getLogger(NewsRSS.class);
 
     NasaConfig nasaConfig;
     DeepLService deepLService;
@@ -49,7 +53,7 @@ public class NewsRSS implements NasaService {
                     })
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return Optional.of(news);
