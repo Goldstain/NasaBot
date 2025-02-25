@@ -8,8 +8,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class NasaBotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NasaBotApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(NasaBotApplication.class, args);
+
+    }
 
 }

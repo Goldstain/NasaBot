@@ -31,19 +31,17 @@ public class UpdateDispatcher {
     }
 
     public void handleUpdate(Update update, NasaBot nasaBot) throws UpdateNotFoundException {
-        if (update.hasMessage() || update.hasCallbackQuery()) {
-            if (update.hasCallbackQuery()) {
-                callbackHandler.useUpdate(update, nasaBot);
-            } else {
-                commandHandler.useUpdate(update, nasaBot);
-                getUserInfo(update);
-            }
+        if (update.hasCallbackQuery()) {
+            callbackHandler.useUpdate(update, nasaBot);
+        } else if (update.hasMessage()) {
+            commandHandler.useUpdate(update, nasaBot);
+            writeLog(update);
         } else {
             throw new UpdateNotFoundException("Отримано оновлення без повідомлення або callback-запиту.");
         }
     }
 
-    private void getUserInfo(Update update) {
+    private void writeLog(Update update) {
         Message message = update.getMessage();
         Long userId = message.getFrom().getId();
         String firstName = message.getFrom().getFirstName();
