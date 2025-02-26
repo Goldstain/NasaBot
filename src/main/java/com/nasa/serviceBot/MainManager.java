@@ -39,12 +39,12 @@ public class MainManager {
         if (keyboards.length == 0) {
             sendMessage.setChatId(chatId);
             sendMessage.setText(message);
-
         } else {
             sendMessage.setChatId(chatId);
             sendMessage.setText(message);
             sendMessage.setReplyMarkup(keyboards[0]);
         }
+
         try {
             nasaBot.execute(sendMessage);
         } catch (TelegramApiException e) {
