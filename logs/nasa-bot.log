@@ -203,3 +203,23 @@ java.lang.NullPointerException: Cannot invoke "org.telegram.telegrambots.meta.ap
 2025-02-23 12:00:34 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.991 seconds (process running for 5.345)
 2025-02-23 12:00:56 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
 2025-02-23 12:00:56 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-26 23:25:21 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.demo.NasaBotApplicationTests]: NasaBotApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-26 23:25:21 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.demo.NasaBotApplicationTests
+2025-02-26 23:25:22 [main] INFO  c.nasa.demo.NasaBotApplicationTests - Starting NasaBotApplicationTests using Java 21.0.4 with PID 15844 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-26 23:25:22 [main] INFO  c.nasa.demo.NasaBotApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-02-26 23:25:25 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-26 23:25:25 [main] INFO  c.nasa.demo.NasaBotApplicationTests - Started NasaBotApplicationTests in 3.901 seconds (process running for 5.715)
+2025-02-26 23:27:49 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 5000 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-26 23:27:49 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-26 23:27:50 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-26 23:27:50 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-26 23:27:50 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-26 23:27:50 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-26 23:27:50 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-26 23:27:50 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1193 ms
+2025-02-26 23:27:52 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-26 23:27:52 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-26 23:27:52 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-26 23:27:52 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.128 seconds (process running for 4.13)
+2025-02-26 23:29:16 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-26 23:29:16 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
