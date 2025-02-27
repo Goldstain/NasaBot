@@ -223,3 +223,159 @@ java.lang.NullPointerException: Cannot invoke "org.telegram.telegrambots.meta.ap
 2025-02-26 23:27:52 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.128 seconds (process running for 4.13)
 2025-02-26 23:29:16 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
 2025-02-26 23:29:16 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-27 22:34:44 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 22:34:44 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 22:34:45 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 8432 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 22:34:45 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 22:34:48 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 22:34:49 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 4.301 seconds (process running for 6.378)
+2025-02-27 22:35:14 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 22:35:14 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 22:35:15 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 12960 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 22:35:15 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 22:35:17 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 22:35:18 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.31 seconds (process running for 4.89)
+2025-02-27 22:39:11 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 22:39:11 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 22:39:12 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 12656 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 22:39:12 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 22:39:15 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 22:39:15 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.489 seconds (process running for 5.07)
+2025-02-27 22:45:18 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 22:45:18 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 22:45:18 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 14720 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 22:45:18 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 22:45:21 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 22:45:21 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.483 seconds (process running for 5.171)
+2025-02-27 22:57:36 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 22:57:36 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 22:57:37 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 14732 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 22:57:37 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 22:57:39 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 22:57:40 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.284 seconds (process running for 4.906)
+2025-02-27 23:01:26 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:01:26 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:01:27 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 14184 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:01:27 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:01:30 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:01:30 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 4.015 seconds (process running for 6.613)
+2025-02-27 23:02:39 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:02:39 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:02:39 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 3516 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:02:39 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:02:42 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:02:43 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.324 seconds (process running for 4.86)
+2025-02-27 23:03:27 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:03:27 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:03:28 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 13256 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:03:28 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:03:30 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:03:31 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.434 seconds (process running for 5.035)
+2025-02-27 23:03:41 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:03:41 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:03:42 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 8012 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:03:42 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:03:44 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:03:45 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.411 seconds (process running for 5.018)
+2025-02-27 23:04:03 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:04:03 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:04:04 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 4936 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:04:04 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:04:07 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:04:07 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.512 seconds (process running for 5.069)
+2025-02-27 23:05:33 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:05:33 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:05:34 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 15636 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:05:34 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:05:36 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:05:37 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.212 seconds (process running for 4.752)
+2025-02-27 23:07:06 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:07:06 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:07:07 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 10076 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:07:07 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:07:09 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:07:10 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.362 seconds (process running for 4.914)
+2025-02-27 23:07:51 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:07:51 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:07:52 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 5200 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:07:52 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:07:55 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:07:55 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.72 seconds (process running for 5.293)
+2025-02-27 23:08:55 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:08:55 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:08:56 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 13864 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:08:56 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:08:58 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:08:59 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.319 seconds (process running for 4.843)
+2025-02-27 23:12:28 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 16532 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:12:28 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:12:29 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-27 23:12:30 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-27 23:12:30 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-27 23:12:30 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-27 23:12:30 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-27 23:12:30 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1192 ms
+2025-02-27 23:12:31 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:12:31 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-27 23:12:31 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-27 23:12:31 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 3.188 seconds (process running for 4.081)
+2025-02-27 23:13:01 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: /start
+2025-02-27 23:13:48 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: Отримати по координатам
+2025-02-27 23:13:59 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: 50.6 -58
+2025-02-27 23:14:32 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: 2025-02-25
+2025-02-27 23:15:48 [nasa_s_bot Telegram Executor] INFO  c.n.s.handler.impl.CommandHandler - User: Viacheslav wrote wrong command:  2025-05-05
+2025-02-27 23:15:48 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: 2025-05-05
+2025-02-27 23:15:53 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-27 23:15:53 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-02-27 23:21:19 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:21:19 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:21:20 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 7076 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:21:20 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:21:22 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:21:23 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.375 seconds (process running for 4.958)
+2025-02-27 23:23:33 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:23:33 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:23:34 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 5852 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:23:34 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:23:37 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:23:37 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.428 seconds (process running for 5.015)
+2025-02-27 23:24:26 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:24:26 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:24:27 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 16452 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:24:27 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:24:29 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:24:30 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.319 seconds (process running for 4.905)
+2025-02-27 23:26:48 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:26:48 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:26:48 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 10488 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:26:48 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:26:51 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:26:51 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.324 seconds (process running for 4.864)
+2025-02-27 23:44:24 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:44:24 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:44:25 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 1488 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:44:25 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:44:27 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:44:28 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.351 seconds (process running for 4.883)
+2025-02-27 23:45:58 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest]: MarsRoverPhotosTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-02-27 23:45:59 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nasa.NasaBotApplication for test class com.nasa.serviceNasaAPI.impl.MarsRoverPhotosTest
+2025-02-27 23:45:59 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Starting MarsRoverPhotosTest using Java 21.0.4 with PID 12852 (started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:45:59 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:46:02 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:46:02 [main] INFO  c.n.s.impl.MarsRoverPhotosTest - Started MarsRoverPhotosTest in 3.529 seconds (process running for 5.14)
+2025-02-27 23:46:18 [main] INFO  com.nasa.NasaBotApplication - Starting NasaBotApplication using Java 21.0.4 with PID 15056 (C:\Users\coman\IdeaProjects\nasa_bot\target\classes started by coman in C:\Users\coman\IdeaProjects\nasa_bot)
+2025-02-27 23:46:18 [main] INFO  com.nasa.NasaBotApplication - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 23:46:19 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-02-27 23:46:19 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-27 23:46:19 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-27 23:46:19 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-27 23:46:19 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-27 23:46:19 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1101 ms
+2025-02-27 23:46:20 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-27 23:46:21 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-27 23:46:21 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-02-27 23:46:21 [main] INFO  com.nasa.NasaBotApplication - Started NasaBotApplication in 2.957 seconds (process running for 3.809)
+2025-02-27 23:47:08 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: 2025-02-24
+2025-02-27 23:47:15 [nasa_s_bot Telegram Executor] INFO  c.nasa.serviceBot.UpdateDispatcher - ID: 803292990 User: Viacheslav null HowardRoarkS Message: 2025-02-23
+2025-02-27 23:47:58 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-27 23:47:58 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete

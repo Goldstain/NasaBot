@@ -109,7 +109,8 @@ public class CallbackHandler implements Handler {
             if (count == 0) break;
         }
         manager.sendTextMessage(
-                chatId, "\uD83D\uDCF9   Вибрати іншу камеру     \uD83D\uDD3D", nasaBot, keyboardFactory.availableCamerasKeyboard(earthDate));
+                chatId, "\uD83D\uDCF9   Вибрати іншу камеру     \uD83D\uDD3D"
+                , nasaBot, keyboardFactory.availableCamerasKeyboard(earthDate));
     }
 
 }

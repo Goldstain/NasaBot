@@ -174,7 +174,7 @@ public class KeyboardFactory {
     }
 
     public InlineKeyboardMarkup availableCamerasKeyboard(String date) {
-        ManifestResponseFull manifestResponseFull = marsRoverPhotos.getManifestResponseFull(date);
+        ManifestResponseFull manifestResponseFull = marsRoverPhotos.getManifestResponseFull();
         ManifestResponseRoverFullDate[] photos = manifestResponseFull.getPhoto_manifest().getPhotos();
         ManifestResponseRoverFullDate fullDate = Arrays.stream(photos)
                 .filter(obj -> obj.getEarth_date().equals(date))

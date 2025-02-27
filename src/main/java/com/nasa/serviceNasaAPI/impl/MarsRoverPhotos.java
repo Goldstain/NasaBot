@@ -42,7 +42,7 @@ public class MarsRoverPhotos implements NasaService {
     }
 
 
-    public ManifestResponseFull getManifestResponseFull(String date) {
+    public ManifestResponseFull getManifestResponseFull() {
         var url = nasaConfig.getMars_rovers_manifest()
                 .concat("curiosity")
                 .concat("?api_key=")
