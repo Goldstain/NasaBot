@@ -16,7 +16,7 @@ class KeyboardFactoryTest {
     private KeyboardFactory keyboardFactory;
 
     @Test
-    void mainMenuButton() {
+    void shouldReturnMainMenuButton() {
         InlineKeyboardMarkup keyboard = keyboardFactory.mainMenuButton();
 
         assertNotNull(keyboard, "Keyboard is null");
@@ -28,7 +28,7 @@ class KeyboardFactoryTest {
     }
 
     @Test
-    void mainMenu() {
+    void shouldReturnMainMenu() {
         InlineKeyboardMarkup keyboard = keyboardFactory.mainMenu();
 
         assertNotNull(keyboard, "Keyboard is null");
@@ -39,7 +39,7 @@ class KeyboardFactoryTest {
     }
 
     @Test
-    void astroInfoMenu() {
+    void shouldReturnAstroInfoMenu() {
         ReplyKeyboardMarkup keyboard = keyboardFactory.astroInfoMenu();
 
         assertNotNull(keyboard, "Keyboard is null");
@@ -50,7 +50,7 @@ class KeyboardFactoryTest {
     }
 
     @Test
-    void roversMenu() {
+    void shouldReturnRoversMenu() {
         InlineKeyboardMarkup keyboard = keyboardFactory.roversMenu();
 
         assertNotNull(keyboard, "Keyboard is null");
@@ -59,7 +59,7 @@ class KeyboardFactoryTest {
     }
 
     @Test
-    void returnToRoversMenu() {
+    void shouldReturnKeyboardToRoversMenu() {
         InlineKeyboardMarkup keyboard = keyboardFactory.returnToRoversMenu();
 
         assertNotNull(keyboard, "Keyboard is null");
@@ -69,7 +69,7 @@ class KeyboardFactoryTest {
     }
 
     @Test
-    void roverPhotoButton() {
+    void shouldReturnRoverPhotoButton() {
         InlineKeyboardMarkup returnToRoversMenu = keyboardFactory.returnToRoversMenu();
         InlineKeyboardMarkup keyboard = keyboardFactory.roverPhotoButton(returnToRoversMenu);
 

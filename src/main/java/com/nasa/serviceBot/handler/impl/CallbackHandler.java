@@ -7,7 +7,6 @@ import com.nasa.serviceBot.callback.Callback;
 import com.nasa.serviceBot.handler.Handler;
 import com.nasa.serviceBot.keyboard.KeyboardFactory;
 import com.nasa.serviceNasaAPI.dto.Photos;
-import com.nasa.serviceNasaAPI.dto.PhotosByDateCamera;
 import com.nasa.serviceNasaAPI.impl.MarsRoverPhotos;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -97,10 +96,10 @@ public class CallbackHandler implements Handler {
         Photos photos = marsRoverPhotos.getPhotos(camera);
         if (photos == null || photos.getPhotos().length == 0) return;
 
-        PhotosByDateCamera[] photosArray = photos.getPhotos();
+        Photos.PhotosByDateCamera[] photosArray = photos.getPhotos();
         String earthDate = photosArray[0].getEarth_date();
         int count = 10;
-        for (PhotosByDateCamera photo : photosArray) {
+        for (Photos.PhotosByDateCamera photo : photosArray) {
             manager.sendPhoto(chatId
                     , photo.getImg_src()
                     , "Фото ID: " + photo.getId() + "\t\t\t" + photo.getEarth_date()
